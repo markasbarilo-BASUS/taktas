@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="lt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Taktas — 54 Potencialūs Klientai</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', -apple-system, sans-serif;
+            background: #f8f9fa; color: #1a1a2e; line-height: 1.5;
+            padding: 2rem;
+        }
+        .container { max-width: 1000px; margin: 0 auto; }
+        .header {
+            text-align: center; margin-bottom: 2.5rem;
+            padding-bottom: 1.5rem; border-bottom: 3px solid #00E59B;
+        }
+        .header h1 { font-size: 2rem; font-weight: 900; letter-spacing: -1px; margin-bottom: 0.25rem; }
+        .header h1 span { color: #00E59B; }
+        .header p { color: #666; font-size: 0.95rem; }
+        .stats {
+            display: flex; gap: 1rem; justify-content: center; margin-top: 1rem; flex-wrap: wrap;
+        }
+        .stat {
+            background: #fff; border: 1px solid #e0e0e0; border-radius: 8px;
+            padding: 0.5rem 1.25rem; text-align: center;
+        }
+        .stat .num { font-size: 1.3rem; font-weight: 900; color: #1a1a2e; }
+        .stat .lbl { font-size: 0.7rem; color: #888; text-transform: uppercase; letter-spacing: 0.5px; }
+
+        .section { margin-bottom: 2.5rem; }
+        .section-header {
+            display: flex; align-items: center; gap: 0.75rem;
+            margin-bottom: 1rem; padding-bottom: 0.5rem;
+            border-bottom: 2px solid #e0e0e0;
+        }
+        .section-badge {
+            background: #00E59B; color: #05080F; padding: 0.2rem 0.7rem;
+            border-radius: 4px; font-size: 0.7rem; font-weight: 800;
+            text-transform: uppercase; letter-spacing: 0.5px;
+        }
+        .section-header h2 { font-size: 1.15rem; font-weight: 800; }
+        .section-header .count { color: #888; font-size: 0.85rem; font-weight: 500; }
+
+        table { width: 100%; border-collapse: collapse; background: #fff; border-radius: 8px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
+        th {
+            background: #1a1a2e; color: #fff; padding: 0.6rem 1rem;
+            text-align: left; font-size: 0.75rem; font-weight: 700;
+            text-transform: uppercase; letter-spacing: 0.5px;
+        }
+        td { padding: 0.55rem 1rem; font-size: 0.85rem; border-bottom: 1px solid #f0f0f0; }
+        tr:last-child td { border-bottom: none; }
+        tr:hover td { background: #f8fffe; }
+        .city { color: #666; }
+        .email a { color: #4F46E5; text-decoration: none; font-weight: 600; }
+        .email a:hover { text-decoration: underline; }
+        .priority {
+            display: inline-block; padding: 0.1rem 0.4rem; border-radius: 3px;
+            font-size: 0.7rem; font-weight: 700; text-transform: uppercase;
+        }
+        .priority.high { background: #ffe0e0; color: #cc0000; }
+        .priority.medium { background: #fff3d0; color: #b8860b; }
+        .priority.normal { background: #e0f0ff; color: #0066cc; }
+
+        .footer {
+            text-align: center; margin-top: 2rem; padding-top: 1.5rem;
+            border-top: 1px solid #e0e0e0; color: #999; font-size: 0.8rem;
+        }
+
+        @media print {
+            body { padding: 0.5rem; background: #fff; }
+            .stat { border: 1px solid #ccc; }
+            table { box-shadow: none; border: 1px solid #ddd; }
+            tr:hover td { background: transparent; }
+            .email a { color: #000; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Tak<span>tas</span> — Potencialūs Klientai</h1>
+            <p>Lead list | Sugeneruota: 2026-03-18</p>
+            <div class="stats">
+                <div class="stat"><div class="num">54</div><div class="lbl">Kontaktai</div></div>
+                <div class="stat"><div class="num">5</div><div class="lbl">Sritys</div></div>
+                <div class="stat"><div class="num">3</div><div class="lbl">Miestai</div></div>
+            </div>
+        </div>
+
+        <!-- ODONTOLOGIJA -->
+        <div class="section">
+            <div class="section-header">
+                <span class="section-badge">1 prioritetas</span>
+                <h2>Odontologijos ir medicinos klinikos</h2>
+                <span class="count">(12 kontaktų)</span>
+            </div>
+            <table>
+                <thead>
+                    <tr><th>#</th><th>Įmonė</th><th>Miestas</th><th>El. paštas</th><th>Prioritetas</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>1</td><td>OZO klinika</td><td class="city">Vilnius</td><td class="email"><a href="mailto:info@ozoklinika.com">info@ozoklinika.com</a></td><td><span class="priority high">Aukštas</span></td></tr>
+                    <tr><td>2</td><td>IMI odontologijos klinika</td><td class="city">Vilnius</td><td class="email"><a href="mailto:info@imiklinika.lt">info@imiklinika.lt</a></td><td><span class="priority high">Aukštas</span></td></tr>
+                    <tr><td>3</td><td>Vilniaus odontologijos klinika</td><td class="city">Vilnius</td><td class="email"><a href="mailto:info@vilniusok.lt">info@vilniusok.lt</a></td><td><span class="priority high">Aukštas</span></td></tr>
+                    <tr><td>4</td><td>RVL klinika</td><td class="city">Vilnius</td><td class="email"><a href="mailto:klinika@rvl.lt">klinika@rvl.lt</a></td><td><span class="priority high">Aukštas</span></td></tr>
+                    <tr><td>5</td><td>Novadenta</td><td class="city">Vilnius</td><td class="email"><a href="mailto:novadentalt@gmail.com">novadentalt@gmail.com</a></td><td><span class="priority medium">Vidutinis</span></td></tr>
+                    <tr><td>6</td><td>Inmodenta</td><td class="city">Kaunas</td><td class="email"><a href="mailto:info@inmodenta.lt">info@inmodenta.lt</a></td><td><span class="priority high">Aukštas</span></td></tr>
+                    <tr><td>7</td><td>Dentaura</td><td class="city">Kaunas</td><td class="email"><a href="mailto:uabdentaura@gmail.com">uabdentaura@gmail.com</a></td><td><span class="priority medium">Vidutinis</span></td></tr>
+                    <tr><td>8</td><td>OPC</td><td class="city">Kaunas</td><td class="email"><a href="mailto:info@opc.lt">info@opc.lt</a></td><td><span class="priority high">Aukštas</span></td></tr>
+                    <tr><td>9</td><td>Dentus</td><td class="city">Klaipėda</td><td class="email"><a href="mailto:info@dentus.lt">info@dentus.lt</a></td><td><span class="priority high">Aukštas</span></td></tr>
+                    <tr><td>10</td><td>MK Odontologija</td><td class="city">Klaipėda</td><td class="email"><a href="mailto:mkodontologija@gmail.com">mkodontologija@gmail.com</a></td><td><span class="priority medium">Vidutinis</span></td></tr>
+                    <tr><td>11</td><td>Odonticija</td><td class="city">Klaipėda</td><td class="email"><a href="mailto:info@odonticija.lt">info@odonticija.lt</a></td><td><span class="priority high">Aukštas</span></td></tr>
+                    <tr><td>12</td><td>Pi klinika</td><td class="city">Klaipėda</td><td class="email"><a href="mailto:info@piklinika.lt">info@piklinika.lt</a></td><td><span class="priority high">Aukštas</span></td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- GROŽIO SALONAI -->
+        <div class="section">
+            <div class="section-header">
+                <span class="section-badge">2 prioritetas</span>
+                <h2>Grožio salonai ir SPA</h2>
+                <span class="count">(12 kontaktų)</span>
+            </div>
+            <table>
+                <thead>
+                    <tr><th>#</th><th>Įmonė</th><th>Miestas</th><th>El. paštas</th><th>Prioritetas</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>13</td><td>Grožio namai Sfinksas</td><td class="city">Vilnius</td><td class="email"><a href="mailto:info@grozionamaisfinksas.lt">info@grozionamaisfinksas.lt</a></td><td><span class="priority high">Aukštas</span></td></tr>
+                    <tr><td>14</td><td>Salon20</td><td class="city">Vilnius</td><td class="email"><a href="mailto:salon20vilnius@gmail.com">salon20vilnius@gmail.com</a></td><td><span class="priority medium">Vidutinis</span></td></tr>
+                    <tr><td>15</td><td>Grožio studija 8</td><td class="city">Vilnius</td><td class="email"><a href="mailto:info@studija8.lt">info@studija8.lt</a></td><td><span class="priority high">Aukštas</span></td></tr>
+                    <tr><td>16</td><td>Šeimos Grožio Centras</td><td class="city">Vilnius</td><td class="email"><a href="mailto:info@seimosgroziocentras.lt">info@seimosgroziocentras.lt</a></td><td><span class="priority high">Aukštas</span></td></tr>
+                    <tr><td>17</td><td>Beauty Center</td><td class="city">Vilnius</td><td class="email"><a href="mailto:pylimo.salonas@gmail.com">pylimo.salonas@gmail.com</a></td><td><span class="priority medium">Vidutinis</span></td></tr>
+                    <tr><td>18</td><td>Beauty Salon 99</td><td class="city">Vilnius</td><td class="email"><a href="mailto:info@beautysalon99.eu">info@beautysalon99.eu</a></td><td><span class="priority normal">Normalus</span></td></tr>
+                    <tr><td>19</td><td>SPA Shanti</td><td class="city">Kaunas</td><td class="email"><a href="mailto:kaunas@spashanti.lt">kaunas@spashanti.lt</a></td><td><span class="priority high">Aukštas</span></td></tr>
+                    <tr><td>20</td><td>5 Senses</td><td class="city">Kaunas</td><td class="email"><a href="mailto:info@5senses.lt">info@5senses.lt</a></td><td><span class="priority high">Aukštas</span></td></tr>
+                    <tr><td>21</td><td>Ma.Ma. Cut</td><td class="city">Kaunas</td><td class="email"><a href="mailto:info@mamacut.lt">info@mamacut.lt</a></td><td><span class="priority medium">Vidutinis</span></td></tr>
+                    <tr><td>22</td><td>Amber Studija</td><td class="city">Klaipėda</td><td class="email"><a href="mailto:ingridaamber@gmail.com">ingridaamber@gmail.com</a></td><td><span class="priority medium">Vidutinis</span></td></tr>
+                    <tr><td>23</td><td>Naturmed SPA</td><td class="city">Klaipėda</td><td class="email"><a href="mailto:naturmed@gmail.com">naturmed@gmail.com</a></td><td><span class="priority medium">Vidutinis</span></td></tr>
+                    <tr><td>24</td><td>East Island SPA</td><td class="city">Klaipėda</td><td class="email"><a href="mailto:info@eastisland.lt">info@eastisland.lt</a></td><td><span class="priority high">Aukštas</span></td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- NEKILNOJAMASIS TURTAS -->
+        <div class="section">
+            <div class="section-header">
+                <span class="section-badge">3 prioritetas</span>
+                <h2>Nekilnojamojo turto agentūros</h2>
+                <span class="count">(10 kontaktų)</span>
+            </div>
+            <table>
+                <thead>
+                    <tr><th>#</th><th>Įmonė</th><th>Miestas</th><th>El. paštas</th><th>Prioritetas</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>25</td><td>Ober-Haus</td><td class="city">Vilnius</td><td class="email"><a href="mailto:info@ober-haus.lt">info@ober-haus.lt</a></td><td><span class="priority high">Aukštas</span></td></tr>
+                    <tr><td>26</td><td>1Partner</td><td class="city">Vilnius</td><td class="email"><a href="mailto:info@1partner.lt">info@1partner.lt</a></td><td><span class="priority high">Aukštas</span></td></tr>
+                    <tr><td>27</td><td>Anrealty</td><td class="city">Vilnius</td><td class="email"><a href="mailto:info@anrealty.lt">info@anrealty.lt</a></td><td><span class="priority high">Aukštas</span></td></tr>
+                    <tr><td>28</td><td>Urban Estate</td><td class="city">Vilnius</td><td class="email"><a href="mailto:info@urbanestate.lt">info@urbanestate.lt</a></td><td><span class="priority high">Aukštas</span></td></tr>
+                    <tr><td>29</td><td>OPPA</td><td class="city">Vilnius</td><td class="email"><a href="mailto:info@oppa.lt">info@oppa.lt</a></td><td><span class="priority medium">Vidutinis</span></td></tr>
+                    <tr><td>30</td><td>Rebaltic</td><td class="city">Vilnius</td><td class="email"><a href="mailto:info@rebaltic.lt">info@rebaltic.lt</a></td><td><span class="priority medium">Vidutinis</span></td></tr>
+                    <tr><td>31</td><td>Capital</td><td class="city">Kaunas</td><td class="email"><a href="mailto:kaunas@capital.lt">kaunas@capital.lt</a></td><td><span class="priority high">Aukštas</span></td></tr>
+                    <tr><td>32</td><td>Savas Bustas</td><td class="city">Kaunas</td><td class="email"><a href="mailto:info@savasbustas.lt">info@savasbustas.lt</a></td><td><span class="priority medium">Vidutinis</span></td></tr>
+                    <tr><td>33</td><td>Adomax</td><td class="city">Kaunas</td><td class="email"><a href="mailto:info@adomaxnt.lt">info@adomaxnt.lt</a></td><td><span class="priority medium">Vidutinis</span></td></tr>
+                    <tr><td>34</td><td>Naminta</td><td class="city">Klaipėda</td><td class="email"><a href="mailto:naminta@naminta.lt">naminta@naminta.lt</a></td><td><span class="priority normal">Normalus</span></td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- STATYBA -->
+        <div class="section">
+            <div class="section-header">
+                <span class="section-badge">4 prioritetas</span>
+                <h2>Statybos ir renovacija</h2>
+                <span class="count">(10 kontaktų)</span>
+            </div>
+            <table>
+                <thead>
+                    <tr><th>#</th><th>Įmonė</th><th>Miestas</th><th>El. paštas</th><th>Prioritetas</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>35</td><td>EVS Statyba</td><td class="city">Vilnius</td><td class="email"><a href="mailto:info@evsstatyba.lt">info@evsstatyba.lt</a></td><td><span class="priority high">Aukštas</span></td></tr>
+                    <tr><td>36</td><td>MOSTA</td><td class="city">Vilnius</td><td class="email"><a href="mailto:info@mosta-statybos.lt">info@mosta-statybos.lt</a></td><td><span class="priority medium">Vidutinis</span></td></tr>
+                    <tr><td>37</td><td>Amiestas</td><td class="city">Vilnius</td><td class="email"><a href="mailto:info@amiestas.lt">info@amiestas.lt</a></td><td><span class="priority high">Aukštas</span></td></tr>
+                    <tr><td>38</td><td>Pažangi Statyba</td><td class="city">Vilnius</td><td class="email"><a href="mailto:info@pazangistatyba.lt">info@pazangistatyba.lt</a></td><td><span class="priority medium">Vidutinis</span></td></tr>
+                    <tr><td>39</td><td>Marvilsta</td><td class="city">Vilnius</td><td class="email"><a href="mailto:info@marvilsta.lt">info@marvilsta.lt</a></td><td><span class="priority medium">Vidutinis</span></td></tr>
+                    <tr><td>40</td><td>Fotonas</td><td class="city">Kaunas</td><td class="email"><a href="mailto:info@fotonas.lt">info@fotonas.lt</a></td><td><span class="priority medium">Vidutinis</span></td></tr>
+                    <tr><td>41</td><td>PL Statyba</td><td class="city">Kaunas</td><td class="email"><a href="mailto:info@plstatyba.lt">info@plstatyba.lt</a></td><td><span class="priority normal">Normalus</span></td></tr>
+                    <tr><td>42</td><td>Simonta</td><td class="city">Klaipėda</td><td class="email"><a href="mailto:info@simonta.lt">info@simonta.lt</a></td><td><span class="priority high">Aukštas</span></td></tr>
+                    <tr><td>43</td><td>Klaibuta</td><td class="city">Klaipėda</td><td class="email"><a href="mailto:info@klaibuta.lt">info@klaibuta.lt</a></td><td><span class="priority medium">Vidutinis</span></td></tr>
+                    <tr><td>44</td><td>Statymo Sprendimai</td><td class="city">Klaipėda</td><td class="email"><a href="mailto:info@statymosprendimai.lt">info@statymosprendimai.lt</a></td><td><span class="priority medium">Vidutinis</span></td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- TEISĖ -->
+        <div class="section">
+            <div class="section-header">
+                <span class="section-badge">5 prioritetas</span>
+                <h2>Teisė ir finansai</h2>
+                <span class="count">(10 kontaktų)</span>
+            </div>
+            <table>
+                <thead>
+                    <tr><th>#</th><th>Įmonė</th><th>Miestas</th><th>El. paštas</th><th>Prioritetas</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>45</td><td>Sulija & Partners</td><td class="city">Vilnius</td><td class="email"><a href="mailto:info@SulijaPartners.com">info@SulijaPartners.com</a></td><td><span class="priority high">Aukštas</span></td></tr>
+                    <tr><td>46</td><td>WINLEX</td><td class="city">Vilnius</td><td class="email"><a href="mailto:info@winlex.lt">info@winlex.lt</a></td><td><span class="priority high">Aukštas</span></td></tr>
+                    <tr><td>47</td><td>ADVIX</td><td class="city">Vilnius</td><td class="email"><a href="mailto:info@advix.lt">info@advix.lt</a></td><td><span class="priority high">Aukštas</span></td></tr>
+                    <tr><td>48</td><td>Vilys, Meskys ir Partneriai</td><td class="city">Vilnius</td><td class="email"><a href="mailto:info@vilys.lt">info@vilys.lt</a></td><td><span class="priority medium">Vidutinis</span></td></tr>
+                    <tr><td>49</td><td>Ellex Valiunas</td><td class="city">Vilnius</td><td class="email"><a href="mailto:lithuania@ellex.legal">lithuania@ellex.legal</a></td><td><span class="priority normal">Normalus</span></td></tr>
+                    <tr><td>50</td><td>GLIMSTEDT</td><td class="city">Vilnius</td><td class="email"><a href="mailto:vilnius@glimstedt.lt">vilnius@glimstedt.lt</a></td><td><span class="priority normal">Normalus</span></td></tr>
+                    <tr><td>51</td><td>Alsauskas ir Kripas</td><td class="city">Kaunas</td><td class="email"><a href="mailto:info@kaunas.legal">info@kaunas.legal</a></td><td><span class="priority high">Aukštas</span></td></tr>
+                    <tr><td>52</td><td>ADJURO</td><td class="city">Kaunas</td><td class="email"><a href="mailto:info@adjuro.lt">info@adjuro.lt</a></td><td><span class="priority medium">Vidutinis</span></td></tr>
+                    <tr><td>53</td><td>Katilius ir partneriai</td><td class="city">Kaunas</td><td class="email"><a href="mailto:info@advokatai-lt.com">info@advokatai-lt.com</a></td><td><span class="priority medium">Vidutinis</span></td></tr>
+                    <tr><td>54</td><td>Finansu baba</td><td class="city">Kaunas</td><td class="email"><a href="mailto:info@finansubaba.lt">info@finansubaba.lt</a></td><td><span class="priority medium">Vidutinis</span></td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="footer">
+            <p>Taktas Lead List &mdash; Sugeneruota 2026-03-18 &mdash; Visi el. pašto adresai paimti iš viešai prieinamų šaltinių</p>
+        </div>
+    </div>
+</body>
+</html>

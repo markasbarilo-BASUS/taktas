@@ -38,6 +38,26 @@
             overflow-x: hidden;
         }
 
+        /* PROMO BANNER */
+        .promo-banner {
+            position: fixed; top: 0; left: 0; width: 100%; z-index: 101;
+            background: linear-gradient(135deg, #FF6B00, #FF4444);
+            padding: 0.55rem 1rem; text-align: center;
+            font-size: 0.82rem; font-weight: 700; color: #fff;
+            letter-spacing: 0.3px;
+        }
+        .promo-banner a {
+            color: #fff; text-decoration: underline; font-weight: 800; margin-left: 0.3rem;
+        }
+        .promo-banner .promo-close {
+            position: absolute; right: 1rem; top: 50%; transform: translateY(-50%);
+            background: none; border: none; color: rgba(255,255,255,0.7); font-size: 1.1rem;
+            cursor: pointer; line-height: 1;
+        }
+        .promo-banner .promo-close:hover { color: #fff; }
+        body.has-promo nav { top: 34px; }
+        body.has-promo .hero { padding-top: 9.5rem; }
+
         /* NAVBAR */
         nav {
             position: fixed; top: 0; width: 100%; z-index: 100;
@@ -45,6 +65,7 @@
             backdrop-filter: blur(24px);
             background: rgba(5, 8, 15, 0.9);
             border-bottom: 1px solid var(--border);
+            transition: top 0.3s;
         }
         .nav-inner {
             max-width: 1200px; margin: 0 auto;
@@ -492,11 +513,112 @@
             background-size: 50px 50px; pointer-events: none; z-index: 0;
         }
 
+        /* BDAR FORM CHECKBOX */
+        .bdar-consent {
+            display: flex; align-items: flex-start; gap: 0.5rem;
+            width: 100%; margin-top: 0.25rem; text-align: left;
+        }
+        .bdar-consent input[type="checkbox"] {
+            margin-top: 0.2rem; width: 16px; height: 16px; accent-color: var(--accent);
+            flex-shrink: 0; cursor: pointer;
+        }
+        .bdar-consent label {
+            font-size: 0.72rem; color: var(--text-muted); line-height: 1.4; cursor: pointer;
+        }
+        .bdar-consent label a { color: var(--accent); text-decoration: underline; }
+
+        /* SOCIAL PROOF TOAST */
+        .social-toast {
+            position: fixed; bottom: 1.5rem; left: 1.5rem; z-index: 9990;
+            background: var(--bg-card); border: 1px solid var(--border);
+            border-radius: 12px; padding: 0.85rem 1.25rem;
+            display: flex; align-items: center; gap: 0.75rem;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+            transform: translateX(-120%); transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            max-width: 320px;
+        }
+        .social-toast.show { transform: translateX(0); }
+        .social-toast .toast-icon {
+            width: 36px; height: 36px; background: var(--accent-glow);
+            border: 1px solid rgba(0, 229, 155, 0.2); border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 0.9rem; flex-shrink: 0; color: var(--accent);
+        }
+        .social-toast .toast-text { font-size: 0.82rem; }
+        .social-toast .toast-name { font-weight: 700; color: #fff; }
+        .social-toast .toast-action { color: var(--text-muted); font-size: 0.75rem; }
+        .social-toast .toast-time { color: var(--text-muted); font-size: 0.68rem; margin-top: 0.1rem; }
+
+        /* EXIT INTENT POPUP */
+        .exit-overlay {
+            display: none; position: fixed; inset: 0; z-index: 10001;
+            background: rgba(5, 8, 15, 0.88); backdrop-filter: blur(8px);
+            align-items: center; justify-content: center; padding: 1.5rem;
+        }
+        .exit-overlay.show { display: flex; }
+        .exit-box {
+            background: var(--bg-card); border: 2px solid #FF6B00;
+            border-radius: 20px; max-width: 460px; width: 100%;
+            padding: 2.5rem 2rem; text-align: center; position: relative;
+            box-shadow: 0 0 60px rgba(255, 107, 0, 0.15);
+            animation: exitPop 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        @keyframes exitPop {
+            from { opacity: 0; transform: scale(0.9) translateY(20px); }
+            to { opacity: 1; transform: scale(1) translateY(0); }
+        }
+        .exit-box .exit-close {
+            position: absolute; top: 0.75rem; right: 1rem;
+            background: none; border: none; color: var(--text-muted);
+            font-size: 1.5rem; cursor: pointer; line-height: 1;
+        }
+        .exit-box .exit-close:hover { color: #fff; }
+        .exit-box .exit-icon { font-size: 3rem; margin-bottom: 1rem; }
+        .exit-box h3 {
+            font-size: 1.6rem; font-weight: 900; color: #fff;
+            margin-bottom: 0.25rem; line-height: 1.2;
+        }
+        .exit-box h3 em {
+            font-style: normal;
+            background: linear-gradient(135deg, #FF6B00, #FF4444);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+        }
+        .exit-box .exit-offer {
+            font-size: 3rem; font-weight: 900; color: #FF6B00;
+            line-height: 1; margin: 0.5rem 0;
+        }
+        .exit-box .exit-offer-label {
+            font-size: 0.85rem; font-weight: 800; color: #FF6B00;
+            text-transform: uppercase; letter-spacing: 2px;
+        }
+        .exit-box .exit-desc {
+            color: var(--text-muted); font-size: 0.88rem;
+            margin: 0.75rem 0 1.25rem; line-height: 1.5;
+        }
+        .exit-box .exit-cta {
+            display: inline-block; width: 100%; padding: 0.95rem 2rem;
+            background: linear-gradient(135deg, #FF6B00, #FF4444);
+            color: #fff; border: none; border-radius: 12px;
+            font-size: 1rem; font-weight: 800; cursor: pointer;
+            font-family: inherit; text-transform: uppercase; letter-spacing: 0.5px;
+            transition: all 0.3s; text-decoration: none;
+        }
+        .exit-box .exit-cta:hover {
+            transform: translateY(-2px); box-shadow: 0 8px 25px rgba(255, 107, 0, 0.35);
+        }
+        .exit-box .exit-note {
+            font-size: 0.72rem; color: var(--text-muted); margin-top: 0.75rem;
+        }
+
         /* Mobile */
         @media (max-width: 768px) {
             .problem-grid { grid-template-columns: 1fr; }
             .proof-strip { gap: 0.75rem; }
             .proof-box { min-width: 100px; padding: 0.75rem 1rem; }
+            .social-toast { left: 0.75rem; right: 0.75rem; max-width: none; bottom: 1rem; }
+            .exit-box { padding: 2rem 1.5rem; }
+            .exit-box h3 { font-size: 1.3rem; }
+            .exit-box .exit-offer { font-size: 2.5rem; }
         }
         @media (max-width: 640px) {
             .step { flex-direction: column; gap: 0.6rem; }
@@ -508,11 +630,21 @@
             .roi-row { flex-direction: column; gap: 0.2rem; text-align: center; }
             .nav-link { display: none; }
             .ticker-wrap { display: none; }
+            .promo-banner { font-size: 0.7rem; padding: 0.5rem 2rem 0.5rem 0.75rem; }
+            body.has-promo nav { top: 32px; }
+            body.has-promo .hero { padding-top: 9rem; }
         }
     </style>
 </head>
 <body>
     <div class="grid-bg"></div>
+
+    <!-- PROMO URGENCY BANNER -->
+    <div class="promo-banner" id="promoBanner">
+        Kovo akcija: Liko tik <strong>3 vietos</strong> &mdash; 2 m&#279;nesiai nemokamai su metiniu planu
+        <a href="#demo">Rezervuoti dabar &rarr;</a>
+        <button class="promo-close" onclick="closePromo()" aria-label="Uždaryti">&times;</button>
+    </div>
 
     <!-- NAV -->
     <nav>
@@ -576,8 +708,12 @@
                         <option value="teise-finansai">Teisė ir finansai</option>
                         <option value="kita">Kita</option>
                     </select>
+                    <div class="bdar-consent">
+                        <input type="checkbox" id="heroConsent" required>
+                        <label for="heroConsent">Sutinku, kad Taktas tvarkytų mano asmens duomenis (el. paštą, telefoną) demo tikslais. Duomenys saugomi ES. <a href="#" onclick="document.getElementById('privacyModal').style.display='flex';return false;">Privatumo politika</a>.</label>
+                    </div>
                     <button type="submit">Gauti nemokamą demo per 24h</button>
-                    <p class="form-note">Be sutarčių. Be rizikos. Demo pilnai pritaikytas jūsų verslui.</p>
+                    <p class="form-note">Jokio šlamšto. Atsisakykite bet kada. Jūsų duomenys saugiai saugomi ES.</p>
                 </form>
                 <div class="success-message" id="heroSuccess">
                     Puiku! Jūsų demo ruošiamas. Susisieksime per 24h.
@@ -1008,6 +1144,10 @@
                     <option value="teise-finansai">Teisė ir finansai</option>
                     <option value="kita">Kita</option>
                 </select>
+                <div class="bdar-consent">
+                    <input type="checkbox" id="bottomConsent" required>
+                    <label for="bottomConsent">Sutinku, kad Taktas tvarkytų mano asmens duomenis demo tikslais. <a href="#" onclick="document.getElementById('privacyModal').style.display='flex';return false;">Privatumo politika</a>.</label>
+                </div>
                 <button type="submit">Gauti nemokamą demo</button>
             </form>
             <div class="success-message" id="bottomSuccess">
@@ -1024,10 +1164,110 @@
                 <a href="#kainos">Kainos</a>
                 <a href="#sritys">Sritys</a>
                 <a href="mailto:info@taktas.lt">info@taktas.lt</a>
+                <a href="#" onclick="document.getElementById('privacyModal').style.display='flex';return false;">Privatumo politika</a>
             </div>
             <p class="footer-text">&copy; 2026 Taktas. Vilnius, Lietuva.</p>
         </div>
     </footer>
+
+    <!-- BDAR COOKIE BANNER -->
+    <div id="bdarBanner" style="display:none; position:fixed; bottom:0; left:0; right:0; z-index:9999; background:rgba(13,17,23,0.97); backdrop-filter:blur(12px); border-top:1px solid rgba(255,255,255,0.08); padding:1.25rem 2rem; font-family:'Inter',sans-serif;">
+        <div style="max-width:1200px; margin:0 auto; display:flex; align-items:center; justify-content:space-between; gap:1.5rem; flex-wrap:wrap;">
+            <div style="flex:1; min-width:280px;">
+                <p style="font-size:0.9rem; color:#E2E8F0; margin-bottom:0.25rem; font-weight:600;">Mes naudojame slapukus</p>
+                <p style="font-size:0.78rem; color:#94A3B8; line-height:1.5;">Šioje svetainėje naudojami slapukai, kad užtikrintume geriausią patirtį. Paspaudę „Sutinku" sutinkate su visų slapukų naudojimu. Daugiau informacijos — <a href="#" onclick="document.getElementById('privacyModal').style.display='flex';return false;" style="color:#00E59B; text-decoration:underline;">Privatumo politika</a>.</p>
+            </div>
+            <div style="display:flex; gap:0.6rem; flex-shrink:0;">
+                <button onclick="bdarAccept('all')" style="padding:0.6rem 1.5rem; background:#00E59B; color:#05080F; border:none; border-radius:8px; font-size:0.82rem; font-weight:800; cursor:pointer; font-family:inherit; text-transform:uppercase; letter-spacing:0.5px;">Sutinku</button>
+                <button onclick="bdarAccept('essential')" style="padding:0.6rem 1.5rem; background:transparent; color:#94A3B8; border:1px solid rgba(255,255,255,0.15); border-radius:8px; font-size:0.82rem; font-weight:600; cursor:pointer; font-family:inherit;">Tik būtini</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- PRIVATUMO POLITIKA MODAL -->
+    <div id="privacyModal" style="display:none; position:fixed; inset:0; z-index:10000; background:rgba(5,8,15,0.85); backdrop-filter:blur(8px); align-items:center; justify-content:center; padding:2rem;">
+        <div style="background:#0D1117; border:1px solid rgba(255,255,255,0.08); border-radius:16px; max-width:700px; width:100%; max-height:80vh; overflow-y:auto; padding:2.5rem; position:relative;">
+            <button onclick="document.getElementById('privacyModal').style.display='none'" style="position:absolute; top:1rem; right:1rem; background:none; border:none; color:#94A3B8; font-size:1.5rem; cursor:pointer; line-height:1;">&times;</button>
+            <h2 style="font-size:1.5rem; font-weight:900; color:#fff; margin-bottom:0.5rem;">Privatumo politika</h2>
+            <p style="color:#94A3B8; font-size:0.8rem; margin-bottom:1.5rem;">Paskutinis atnaujinimas: 2026-03-18</p>
+
+            <div style="color:#E2E8F0; font-size:0.88rem; line-height:1.7;">
+                <h3 style="color:#00E59B; font-size:1rem; font-weight:800; margin:1.25rem 0 0.5rem;">1. Duomenų valdytojas</h3>
+                <p>UAB „Taktas", įmonės kodas: [nurodykite], adresas: Vilnius, Lietuva. El. paštas: <a href="mailto:info@taktas.lt" style="color:#00E59B;">info@taktas.lt</a>.</p>
+
+                <h3 style="color:#00E59B; font-size:1rem; font-weight:800; margin:1.25rem 0 0.5rem;">2. Kokius duomenis renkame</h3>
+                <ul style="padding-left:1.2rem; margin-bottom:0.75rem;">
+                    <li>El. pašto adresas ir telefono numeris (pateikti per kontaktinę formą)</li>
+                    <li>Verslo sritis (pasirinkta formoje)</li>
+                    <li>Techniniai duomenys: IP adresas, naršyklės tipas, apsilankymo laikas</li>
+                    <li>Slapukų duomenys (žr. 5 skyrių)</li>
+                </ul>
+
+                <h3 style="color:#00E59B; font-size:1rem; font-weight:800; margin:1.25rem 0 0.5rem;">3. Duomenų tvarkymo tikslai</h3>
+                <ul style="padding-left:1.2rem; margin-bottom:0.75rem;">
+                    <li>Atsakyti į jūsų užklausas ir pateikti demo</li>
+                    <li>Teikti ir tobulinti mūsų paslaugas</li>
+                    <li>Siųsti tiesioginės rinkodaros pranešimus (tik gavus sutikimą)</li>
+                    <li>Vykdyti teisines prievoles</li>
+                </ul>
+
+                <h3 style="color:#00E59B; font-size:1rem; font-weight:800; margin:1.25rem 0 0.5rem;">4. Teisinis pagrindas</h3>
+                <p>Duomenis tvarkome remiantis: jūsų sutikimu (BDAR 6 str. 1 d. a p.), sutarties vykdymu (b p.), teisėtu interesu (f p.) arba teisinės prievolės vykdymu (c p.).</p>
+
+                <h3 style="color:#00E59B; font-size:1rem; font-weight:800; margin:1.25rem 0 0.5rem;">5. Slapukai</h3>
+                <p>Naudojame šiuos slapukų tipus:</p>
+                <ul style="padding-left:1.2rem; margin-bottom:0.75rem;">
+                    <li><strong>Būtinieji slapukai</strong> — reikalingi svetainės veikimui (pvz., slapukų sutikimo būsena)</li>
+                    <li><strong>Analitiniai slapukai</strong> — padeda suprasti, kaip lankytojai naudojasi svetaine</li>
+                    <li><strong>Rinkodaros slapukai</strong> — naudojami rodyti aktualią reklamą</li>
+                </ul>
+                <p>Galite valdyti slapukus naršyklės nustatymuose arba paspaudę „Tik būtini" slapukų juostoje.</p>
+
+                <h3 style="color:#00E59B; font-size:1rem; font-weight:800; margin:1.25rem 0 0.5rem;">6. Duomenų saugojimo laikotarpis</h3>
+                <p>Kontaktinius duomenis saugome ne ilgiau kaip 2 metus nuo paskutinio kontakto. Slapukų duomenys saugomi pagal kiekvieno slapuko galiojimo laikotarpį.</p>
+
+                <h3 style="color:#00E59B; font-size:1rem; font-weight:800; margin:1.25rem 0 0.5rem;">7. Jūsų teisės</h3>
+                <p>Pagal BDAR turite teisę:</p>
+                <ul style="padding-left:1.2rem; margin-bottom:0.75rem;">
+                    <li>Susipažinti su savo duomenimis</li>
+                    <li>Reikalauti ištaisyti netikslius duomenis</li>
+                    <li>Reikalauti ištrinti duomenis („teisė būti pamirštam")</li>
+                    <li>Apriboti duomenų tvarkymą</li>
+                    <li>Perkelti duomenis kitam valdytojui</li>
+                    <li>Nesutikti su duomenų tvarkymu</li>
+                    <li>Atšaukti sutikimą bet kuriuo metu</li>
+                </ul>
+                <p>Norėdami pasinaudoti šiomis teisėmis, rašykite: <a href="mailto:info@taktas.lt" style="color:#00E59B;">info@taktas.lt</a>.</p>
+
+                <h3 style="color:#00E59B; font-size:1rem; font-weight:800; margin:1.25rem 0 0.5rem;">8. Skundai</h3>
+                <p>Jei manote, kad jūsų duomenys tvarkomi neteisėtai, turite teisę pateikti skundą Valstybinei duomenų apsaugos inspekcijai (<a href="https://vdai.lrv.lt" style="color:#00E59B;" target="_blank" rel="noopener">vdai.lrv.lt</a>).</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- SOCIAL PROOF TOAST -->
+    <div class="social-toast" id="socialToast">
+        <div class="toast-icon">&#10003;</div>
+        <div class="toast-text">
+            <div class="toast-name" id="toastName">Jonas iš Vilniaus</div>
+            <div class="toast-action" id="toastAction">užsisakė demo</div>
+            <div class="toast-time" id="toastTime">prieš 12 min.</div>
+        </div>
+    </div>
+
+    <!-- EXIT INTENT POPUP -->
+    <div class="exit-overlay" id="exitPopup">
+        <div class="exit-box">
+            <button class="exit-close" onclick="closeExitPopup()" aria-label="Uždaryti">&times;</button>
+            <div class="exit-icon">&#9200;</div>
+            <h3>Palauk! Turime <em>special&#371;</em> pasi&#363;lym&#261;</h3>
+            <div class="exit-offer">2 m&#279;n.</div>
+            <div class="exit-offer-label">NEMOKAMAI</div>
+            <p class="exit-desc">Pasirinkite metin&#303; plan&#261; ir gaukite <strong>2 m&#279;nesius nemokamai</strong>.<br>Nemokama 30 min. konsultacija pridedama.</p>
+            <button class="exit-cta" onclick="closeExitPopup();document.getElementById('demo').scrollIntoView({behavior:'smooth'});">Rezervuoti nemokam&#261; konsultacij&#261;</button>
+            <p class="exit-note">Joki&#371; &#303;sipareigojim&#371;. Tik pokalbis.</p>
+        </div>
+    </div>
 
     <script>
         const STORAGE_KEY = 'taktas_leads';
@@ -1109,6 +1349,120 @@
                 spotsEl.textContent = spots;
             }
         }, 25000);
+
+        // BDAR (GDPR) Cookie Consent
+        function bdarAccept(level) {
+            const consent = { level, date: new Date().toISOString() };
+            localStorage.setItem('taktas_bdar', JSON.stringify(consent));
+            document.getElementById('bdarBanner').style.display = 'none';
+        }
+
+        function bdarCheck() {
+            const consent = localStorage.getItem('taktas_bdar');
+            if (!consent) {
+                document.getElementById('bdarBanner').style.display = 'block';
+            }
+        }
+
+        // Close privacy modal on backdrop click
+        document.getElementById('privacyModal').addEventListener('click', function(e) {
+            if (e.target === this) this.style.display = 'none';
+        });
+
+        bdarCheck();
+
+        // PROMO BANNER
+        function closePromo() {
+            document.getElementById('promoBanner').style.display = 'none';
+            document.body.classList.remove('has-promo');
+            sessionStorage.setItem('taktas_promo_closed', '1');
+        }
+
+        if (!sessionStorage.getItem('taktas_promo_closed')) {
+            document.body.classList.add('has-promo');
+        } else {
+            document.getElementById('promoBanner').style.display = 'none';
+        }
+
+        // SOCIAL PROOF TOASTS
+        (function() {
+            const proofs = [
+                { name: 'Jonas iš Vilniaus', action: 'užsisakė demo', time: 'prieš 12 min.' },
+                { name: 'Laura iš Šiaulių', action: 'rezervavo konsultaciją', time: 'prieš 45 min.' },
+                { name: 'Mindaugas iš Kauno', action: 'užsisakė demo', time: 'prieš 1 val.' },
+                { name: 'Eglė iš Klaipėdos', action: 'pradėjo naudoti Taktas', time: 'prieš 2 val.' },
+                { name: 'Tomas iš Vilniaus', action: 'užsisakė Augimo planą', time: 'prieš 3 val.' },
+                { name: 'Agnė iš Kauno', action: 'rezervavo konsultaciją', time: 'prieš 25 min.' },
+                { name: 'Robertas iš Vilniaus', action: 'užsisakė demo', time: 'prieš 8 min.' },
+                { name: 'Dovilė iš Panevėžio', action: 'pradėjo naudoti Taktas', time: 'prieš 1 val.' },
+            ];
+            const toast = document.getElementById('socialToast');
+            const nameEl = document.getElementById('toastName');
+            const actionEl = document.getElementById('toastAction');
+            const timeEl = document.getElementById('toastTime');
+            let idx = 0;
+
+            function showToast() {
+                const p = proofs[idx % proofs.length];
+                nameEl.textContent = p.name;
+                actionEl.textContent = p.action;
+                timeEl.textContent = p.time;
+                toast.classList.add('show');
+
+                setTimeout(function() {
+                    toast.classList.remove('show');
+                }, 4500);
+
+                idx++;
+            }
+
+            // First toast after 8s, then every 25-40s
+            setTimeout(function() {
+                showToast();
+                setInterval(showToast, 25000 + Math.random() * 15000);
+            }, 8000);
+        })();
+
+        // EXIT INTENT POPUP
+        (function() {
+            let exitShown = false;
+
+            function closeExitPopup() {
+                document.getElementById('exitPopup').classList.remove('show');
+                sessionStorage.setItem('taktas_exit_shown', '1');
+            }
+            window.closeExitPopup = closeExitPopup;
+
+            // Desktop: mouse leaves viewport top
+            document.addEventListener('mouseout', function(e) {
+                if (exitShown || sessionStorage.getItem('taktas_exit_shown')) return;
+                if (e.clientY <= 0 && e.relatedTarget === null) {
+                    document.getElementById('exitPopup').classList.add('show');
+                    exitShown = true;
+                }
+            });
+
+            // Mobile: back button / long idle (30s without scroll)
+            let mobileTimer;
+            function resetMobileTimer() {
+                clearTimeout(mobileTimer);
+                if (exitShown || sessionStorage.getItem('taktas_exit_shown')) return;
+                mobileTimer = setTimeout(function() {
+                    if (window.innerWidth <= 768) {
+                        document.getElementById('exitPopup').classList.add('show');
+                        exitShown = true;
+                    }
+                }, 30000);
+            }
+            window.addEventListener('scroll', resetMobileTimer, { passive: true });
+            window.addEventListener('touchstart', resetMobileTimer, { passive: true });
+            resetMobileTimer();
+
+            // Close on overlay click
+            document.getElementById('exitPopup').addEventListener('click', function(e) {
+                if (e.target === this) closeExitPopup();
+            });
+        })();
     </script>
 </body>
 </html>

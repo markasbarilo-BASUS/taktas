@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html lang="lt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Taktas — Sales Playbook & Cold Outreach System</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', -apple-system, sans-serif;
+            background: #f8f9fa; color: #1a1a2e; line-height: 1.65;
+            padding: 2rem;
+        }
+        .container { max-width: 900px; margin: 0 auto; }
+
+        /* Header */
+        .header {
+            text-align: center; margin-bottom: 3rem;
+            padding-bottom: 2rem; border-bottom: 3px solid #00E59B;
+        }
+        .header h1 { font-size: 2.2rem; font-weight: 900; letter-spacing: -1px; margin-bottom: 0.25rem; }
+        .header h1 span { color: #00E59B; }
+        .header .sub { color: #666; font-size: 0.95rem; margin-bottom: 1rem; }
+        .header .version { display: inline-block; background: #1a1a2e; color: #00E59B; padding: 0.2rem 0.8rem; border-radius: 4px; font-size: 0.75rem; font-weight: 700; }
+
+        /* TOC */
+        .toc {
+            background: #fff; border: 1px solid #e0e0e0; border-radius: 10px;
+            padding: 1.5rem 2rem; margin-bottom: 2.5rem;
+        }
+        .toc h3 { font-size: 1rem; margin-bottom: 0.75rem; color: #1a1a2e; }
+        .toc ol { padding-left: 1.25rem; }
+        .toc li { padding: 0.2rem 0; font-size: 0.9rem; color: #4F46E5; }
+        .toc a { color: #4F46E5; text-decoration: none; }
+        .toc a:hover { text-decoration: underline; }
+
+        /* Sections */
+        .section { margin-bottom: 3rem; page-break-inside: avoid; }
+        .section-num {
+            display: inline-block; background: #00E59B; color: #05080F;
+            width: 28px; height: 28px; border-radius: 6px; text-align: center;
+            line-height: 28px; font-size: 0.8rem; font-weight: 900; margin-right: 0.5rem;
+            vertical-align: middle;
+        }
+        h2 { font-size: 1.4rem; font-weight: 900; margin-bottom: 1rem; color: #1a1a2e; display: inline; vertical-align: middle; }
+        h2.block { display: block; }
+        .section > p, .section > ul, .section > ol { margin-bottom: 1rem; font-size: 0.92rem; }
+        .section ul, .section ol { padding-left: 1.5rem; }
+        .section li { margin-bottom: 0.35rem; font-size: 0.92rem; }
+
+        h3 { font-size: 1.1rem; font-weight: 800; margin: 1.5rem 0 0.75rem; color: #1a1a2e; }
+        h4 { font-size: 0.95rem; font-weight: 700; margin: 1rem 0 0.5rem; color: #4F46E5; }
+
+        /* Highlight boxes */
+        .rule-box {
+            background: #fff; border-left: 4px solid #00E59B; border-radius: 0 8px 8px 0;
+            padding: 1rem 1.25rem; margin: 1rem 0; font-size: 0.9rem;
+        }
+        .rule-box strong { color: #1a1a2e; }
+        .warning-box {
+            background: #fff8e0; border-left: 4px solid #F59E0B; border-radius: 0 8px 8px 0;
+            padding: 1rem 1.25rem; margin: 1rem 0; font-size: 0.9rem;
+        }
+        .danger-box {
+            background: #fff0f0; border-left: 4px solid #FF4444; border-radius: 0 8px 8px 0;
+            padding: 1rem 1.25rem; margin: 1rem 0; font-size: 0.9rem;
+        }
+
+        /* Email templates */
+        .email-block {
+            background: #fff; border: 1px solid #e0e0e0; border-radius: 10px;
+            margin: 1.25rem 0; overflow: hidden;
+        }
+        .email-header {
+            background: #1a1a2e; color: #fff; padding: 0.6rem 1.25rem;
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .email-header .label { font-size: 0.75rem; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; }
+        .email-header .tag { background: #00E59B; color: #05080F; padding: 0.15rem 0.5rem; border-radius: 4px; font-size: 0.65rem; font-weight: 800; }
+        .email-subject {
+            padding: 0.75rem 1.25rem; border-bottom: 1px solid #f0f0f0;
+            font-size: 0.85rem; color: #666;
+        }
+        .email-subject strong { color: #1a1a2e; }
+        .email-body {
+            padding: 1.25rem; font-size: 0.88rem; line-height: 1.7; color: #333;
+            white-space: pre-line;
+        }
+        .email-body .var { background: #e8f5e9; color: #2e7d32; padding: 0.1rem 0.3rem; border-radius: 3px; font-weight: 600; font-size: 0.85rem; }
+
+        /* Tables */
+        table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.85rem; }
+        th { background: #1a1a2e; color: #fff; padding: 0.6rem 0.75rem; text-align: left; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.5px; }
+        td { padding: 0.55rem 0.75rem; border-bottom: 1px solid #f0f0f0; }
+        tr:nth-child(even) td { background: #f8f9fa; }
+
+        /* Timeline */
+        .timeline { margin: 1rem 0; }
+        .week {
+            background: #fff; border: 1px solid #e0e0e0; border-radius: 10px;
+            padding: 1.25rem; margin-bottom: 1rem;
+        }
+        .week-header {
+            display: flex; justify-content: space-between; align-items: center;
+            margin-bottom: 0.75rem; padding-bottom: 0.5rem; border-bottom: 1px solid #f0f0f0;
+        }
+        .week-title { font-size: 1rem; font-weight: 800; color: #1a1a2e; }
+        .week-target { background: #00E59B; color: #05080F; padding: 0.2rem 0.6rem; border-radius: 4px; font-size: 0.7rem; font-weight: 800; }
+        .week ul { padding-left: 1.25rem; }
+        .week li { font-size: 0.88rem; margin-bottom: 0.3rem; }
+
+        /* Sequence diagram */
+        .sequence { display: flex; gap: 0; margin: 1.5rem 0; flex-wrap: wrap; }
+        .seq-step {
+            flex: 1; min-width: 120px; text-align: center; padding: 1rem 0.5rem;
+            background: #fff; border: 1px solid #e0e0e0; position: relative;
+        }
+        .seq-step:first-child { border-radius: 8px 0 0 8px; }
+        .seq-step:last-child { border-radius: 0 8px 8px 0; }
+        .seq-step .day { font-size: 0.65rem; color: #888; text-transform: uppercase; font-weight: 700; letter-spacing: 0.5px; }
+        .seq-step .action { font-size: 0.8rem; font-weight: 700; color: #1a1a2e; margin: 0.25rem 0; }
+        .seq-step .detail { font-size: 0.7rem; color: #888; }
+        .seq-step.active { background: #f0fdf4; border-color: #00E59B; }
+
+        /* Metrics */
+        .metrics {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 0.75rem; margin: 1rem 0;
+        }
+        .metric {
+            background: #fff; border: 1px solid #e0e0e0; border-radius: 8px;
+            padding: 1rem; text-align: center;
+        }
+        .metric .num { font-size: 1.5rem; font-weight: 900; color: #1a1a2e; }
+        .metric .num em { font-style: normal; color: #00E59B; }
+        .metric .lbl { font-size: 0.7rem; color: #888; text-transform: uppercase; letter-spacing: 0.5px; margin-top: 0.15rem; }
+
+        .footer {
+            text-align: center; margin-top: 2rem; padding-top: 1.5rem;
+            border-top: 1px solid #e0e0e0; color: #999; font-size: 0.8rem;
+        }
+
+        @media print {
+            body { padding: 0.5rem; background: #fff; }
+            .email-block, .week, .toc { box-shadow: none; }
+            .section { page-break-inside: avoid; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+
+    <!-- HEADER -->
+    <div class="header">
+        <h1>Tak<span>tas</span> Sales Playbook</h1>
+        <p class="sub">Cold Outreach System &mdash; Email Templates &mdash; Weekly Strategy</p>
+        <span class="version">v1.0 &mdash; 2026-03-18</span>
+    </div>
+
+    <!-- TOC -->
+    <div class="toc">
+        <h3>Turinys</h3>
+        <ol>
+            <li><a href="#s1">Auksinės taisyklės — ko niekada nedaryti</a></li>
+            <li><a href="#s2">Email sekos struktūra (5-step sequence)</a></li>
+            <li><a href="#s3">Universalūs šablonai — Email 1-5</a></li>
+            <li><a href="#s4">Nišiniai šablonai — Odontologija</a></li>
+            <li><a href="#s5">Nišiniai šablonai — Grožio salonai</a></li>
+            <li><a href="#s6">Nišiniai šablonai — Nekilnojamasis turtas</a></li>
+            <li><a href="#s7">Nišiniai šablonai — Statybos ir renovacija</a></li>
+            <li><a href="#s8">Nišiniai šablonai — Teisė ir finansai</a></li>
+            <li><a href="#s9">8 savaičių strategija — savaitė po savaitės</a></li>
+            <li><a href="#s10">KPI ir metrikos</a></li>
+            <li><a href="#s11">Follow-up taisyklės ir atsakymų šablonai</a></li>
+        </ol>
+    </div>
+
+    <!-- SECTION 1: GOLDEN RULES -->
+    <div class="section" id="s1">
+        <span class="section-num">1</span>
+        <h2>Auksinės taisyklės — ko niekada nedaryti</h2>
+
+        <div class="rule-box">
+            <strong>Taisyklė #1:</strong> Niekada neparduok pirmame laiške. Pirmas laiškas = sukelti smalsumą ir pradėti pokalbį.
+        </div>
+        <div class="rule-box">
+            <strong>Taisyklė #2:</strong> Subject line — max 6 žodžiai. Jokių "Pasiūlymas", "Bendradarbiavimas", "AI sprendimas". Tai spam triggeriai.
+        </div>
+        <div class="rule-box">
+            <strong>Taisyklė #3:</strong> Kiekvienas laiškas — max 80 žodžių. Lietuvos verslininkai neskaito ilgų laiškų. Trumpiau = geriau.
+        </div>
+        <div class="rule-box">
+            <strong>Taisyklė #4:</strong> Personalizuok pirmą sakinį. Paminėk jų įmonės vardą, paslaugą arba kažką specifinio. Copy-paste = delete.
+        </div>
+        <div class="rule-box">
+            <strong>Taisyklė #5:</strong> Vienas CTA per laišką. Ne "Paskambinkite arba parašykite arba užsiregistruokite". Vienas veiksmas.
+        </div>
+
+        <div class="danger-box">
+            <strong>NIEKADA:</strong> Neprisegk priedų pirmame laiške (spam filtras). Nenaudok HTML formatavimo (plain text only). Nesiųsk daugiau nei 30 laiškų/dieną iš vieno adreso. Nenaudok žodžių: "nemokamas", "nuolaida", "reklama", "pasiūlymas".
+        </div>
+
+        <div class="warning-box">
+            <strong>TECHNINIS SETUP:</strong> Siųsk iš <code>vardas@taktas.lt</code> (ne Gmail). Sukonfigūruok SPF, DKIM, DMARC prieš pradedant. Pirmas 2 savaites "šildyk" domeną — siųsk po 5-10 laiškų/dieną draugams/kolegoms. Po to didink iki 20-30/dieną.
+        </div>
+    </div>
+
+    <!-- SECTION 2: SEQUENCE STRUCTURE -->
+    <div class="section" id="s2">
+        <span class="section-num">2</span>
+        <h2>Email sekos struktūra</h2>
+
+        <p>Kiekvienam kontaktui siunčiame <strong>5 laiškų seką</strong> per 21 dieną. Jei po 5 laiškų neatsakė — perkeliame į "nurture" sąrašą (laiškų siuntimas kas mėnesį su naujienomis).</p>
+
+        <div class="sequence">
+            <div class="seq-step active">
+                <div class="day">Diena 1</div>
+                <div class="action">Email #1</div>
+                <div class="detail">Pirmas kontaktas<br>Sukelti smalsumą</div>
+            </div>
+            <div class="seq-step">
+                <div class="day">Diena 3</div>
+                <div class="action">Email #2</div>
+                <div class="detail">Follow-up<br>Duomenys/skaičiai</div>
+            </div>
+            <div class="seq-step">
+                <div class="day">Diena 7</div>
+                <div class="action">Email #3</div>
+                <div class="detail">Vertė<br>Case study</div>
+            </div>
+            <div class="seq-step">
+                <div class="day">Diena 14</div>
+                <div class="action">Email #4</div>
+                <div class="detail">Socialinis įrodymas<br>FOMO</div>
+            </div>
+            <div class="seq-step">
+                <div class="day">Diena 21</div>
+                <div class="action">Email #5</div>
+                <div class="detail">Paskutinis šansas<br>Break-up email</div>
+            </div>
+        </div>
+
+        <div class="rule-box">
+            <strong>Svarbu:</strong> Jei žmogus atsako BET KOKIU būdu (net neigiamu) — NUSTOK siųsti seką. Atsakyk asmeniškai. Neigiamas atsakymas = galimybė pradėti pokalbį.
+        </div>
+    </div>
+
+    <!-- SECTION 3: UNIVERSAL TEMPLATES -->
+    <div class="section" id="s3">
+        <span class="section-num">3</span>
+        <h2>Universalūs šablonai — Email 1-5</h2>
+
+        <p>Šie šablonai veikia <strong>visoms nišoms</strong>. Pakeisk kintamuosius (žali laukeliai) ir siųsk.</p>
+
+        <!-- EMAIL 1 -->
+        <div class="email-block">
+            <div class="email-header">
+                <span class="label">Email #1 — Pirmas kontaktas</span>
+                <span class="tag">Diena 1</span>
+            </div>
+            <div class="email-subject">
+                <strong>Subject:</strong> Klausimas dėl <span class="var">[įmonės pavadinimas]</span>
+            </div>
+            <div class="email-body">Sveiki,
+
+Pastebėjau, kad <span class="var">[įmonės pavadinimas]</span> neturi automatinio atsakymo į klientų užklausas po darbo valandų.
+
+Padariau trumpą analizę — panašios įmonės Lietuvoje dėl to praranda vidutiniškai <span class="var">[15-30]</span> klientų per mėnesį.
+
+Ar būtų įdomu pamatyti, kaip tai atrodo su jūsų verslu? Turiu 60s demo, pritaikytą <span class="var">[jų sričiai]</span>.
+
+<span class="var">[Vardas]</span>
+Taktas.lt</div>
+        </div>
+
+        <!-- EMAIL 2 -->
+        <div class="email-block">
+            <div class="email-header">
+                <span class="label">Email #2 — Follow-up su skaičiais</span>
+                <span class="tag">Diena 3</span>
+            </div>
+            <div class="email-subject">
+                <strong>Subject:</strong> Re: Klausimas dėl <span class="var">[įmonės pavadinimas]</span>
+            </div>
+            <div class="email-body">Sveiki,
+
+Tik greitas follow-up.
+
+Paskaičiavau konkrečiau — jei <span class="var">[įmonės pavadinimas]</span> gauna bent <span class="var">[20]</span> užklausų per mėnesį po darbo valandų, ir vidutinė jūsų paslaugos vertė yra apie <span class="var">[350€]</span>, tai potencialiai prarandate <span class="var">[~3,500€/mėn.]</span>
+
+AI asistentas tai išsprendžia per 5 dienas, už mažiau nei vienos administratorės algą.
+
+Ar verta 15 min. pokalbio?
+
+<span class="var">[Vardas]</span></div>
+        </div>
+
+        <!-- EMAIL 3 -->
+        <div class="email-block">
+            <div class="email-header">
+                <span class="label">Email #3 — Vertė + pavyzdys</span>
+                <span class="tag">Diena 7</span>
+            </div>
+            <div class="email-subject">
+                <strong>Subject:</strong> Kaip <span class="var">[panašios srities]</span> įmonė gavo +<span class="var">[X]</span> klientų/mėn.
+            </div>
+            <div class="email-body">Sveiki,
+
+Trumpa istorija: <span class="var">[panašios srities]</span> įmonė turėjo tą pačią problemą — klientai rašydavo vakare ir savaitgaliais, bet niekas neatsakydavo.
+
+Per pirmą mėnesį su Taktas AI asistentu:
+— Atsakymo laikas sumažėjo nuo 3h iki 3 sekundžių
+— <span class="var">[+15]</span> papildomų registracijų per mėnesį
+— 0 papildomo darbo jiems
+
+Galiu parodyti, kaip tai atrodytų <span class="var">[įmonės pavadinimas]</span> — užtrunka 15 min.
+
+Kada būtų patogu?
+
+<span class="var">[Vardas]</span></div>
+        </div>
+
+        <!-- EMAIL 4 -->
+        <div class="email-block">
+            <div class="email-header">
+                <span class="label">Email #4 — FOMO + socialinis įrodymas</span>
+                <span class="tag">Diena 14</span>
+            </div>
+            <div class="email-subject">
+                <strong>Subject:</strong> Jūsų konkurentai jau pradėjo
+            </div>
+            <div class="email-body">Sveiki,
+
+Norėjau pasidalinti — šį mėnesį jau <span class="var">[X]</span> <span class="var">[srities]</span> įmonės Lietuvoje pradėjo naudoti AI asistentus klientų aptarnavimui.
+
+Klientai pradeda pripinti prie greito atsakymo — ir po to renkasi tą, kas atsako greičiau.
+
+Suprantu, kad laiko visada trūksta. Todėl siūlau ne pokalbį, o tiesiog demo video (60s) — parodysiu kaip tai atrodytų su <span class="var">[įmonės pavadinimas]</span> paslaugomis.
+
+Ar nusiųsti?
+
+<span class="var">[Vardas]</span></div>
+        </div>
+
+        <!-- EMAIL 5 -->
+        <div class="email-block">
+            <div class="email-header">
+                <span class="label">Email #5 — Break-up email</span>
+                <span class="tag">Diena 21</span>
+            </div>
+            <div class="email-subject">
+                <strong>Subject:</strong> Paskutinis laiškas
+            </div>
+            <div class="email-body">Sveiki,
+
+Suprantu — gal dabar ne tas laikas arba tai nėra prioritetas.
+
+Nebetrukdysiu. Bet jeigu ateityje norėsite pamatyti, kaip AI asistentas gali padėti <span class="var">[įmonės pavadinimas]</span> — tiesiog atsakykite į šį laišką ir suderinsime.
+
+Sėkmės,
+<span class="var">[Vardas]</span>
+
+P.S. Pirmiesiems klientams vis dar taikome specialias paleidimo sąlygas.</div>
+        </div>
+
+        <div class="warning-box">
+            <strong>Kodėl break-up email veikia?</strong> Psichologiškai žmonės reaguoja į "praradimą". Kai sakote "paskutinis laiškas" — jie bijo prarasti galimybę. Šis laiškas dažnai turi aukščiausią atsakymo rodiklį visoje sekoje (15-25%).
+        </div>
+    </div>
+
+    <!-- SECTION 4: DENTAL -->
+    <div class="section" id="s4">
+        <span class="section-num">4</span>
+        <h2>Nišinis šablonas — Odontologija</h2>
+
+        <div class="rule-box">
+            <strong>Nišos specifika:</strong> Odontologai supranta "prarastą pacientą" — jie žino kiek kainuoja vienas implantavimas ar protezavimas. Kalbėk jų kalba: pacientai, vizitai, neatvykimai. Skaudžiausias taškas: pacientas skambina po darbo valandų, niekas neatsiliepia, jis nuėjo į kitą kliniką.
+        </div>
+
+        <div class="email-block">
+            <div class="email-header">
+                <span class="label">Odontologija — Email #1</span>
+                <span class="tag">Aukštas konversijos rodiklis</span>
+            </div>
+            <div class="email-subject">
+                <strong>Subject:</strong> Kiek pacientų prarandate vakare?
+            </div>
+            <div class="email-body">Sveiki,
+
+Dirbu su odontologijos klinikomis Lietuvoje ir pastebėjau vieną dalyką — dauguma klinikų neturi automatinio atsakymo po 18:00.
+
+O 60% pacientų ieško odontologo būtent vakare, kai nustoja skaudėti dantį arba pagaliau randa laiko.
+
+<span class="var">[Klinikos pavadinimas]</span> turi puikius atsiliepimus — bet jei neatsakote per 5 min., pacientas tiesiog skambina kitai klinikai.
+
+Ar galiu per 15 min. parodyti, kaip AI registratorė registruotų pacientus jūsų klinikai 24/7 — lietuviškai, su jūsų kainomis ir laisvais laikais?
+
+<span class="var">[Vardas]</span>
+Taktas.lt</div>
+        </div>
+
+        <h4>Personalizacijos taškai odontologijai:</h4>
+        <ul>
+            <li>Paminėk konkrečią paslaugą (implantai, ortodontija, balinimas) — rodo, kad pažįsti jų verslą</li>
+            <li>Jei turi Google Reviews — paminėk: "Mačiau, kad turite 4.8 reitingą — puikus ženklas, kad pacientai vertina jūsų darbą"</li>
+            <li>Neatvykimo problema: "Klinikos su priminimu prieš vizitą sumažina neatvykimus 40%"</li>
+            <li>Sezoniškumas: rugsėjo-lapkričio mėnesiai = didžiausias srautas (mokyklų pradžia, metų pabaigos draudimai)</li>
+        </ul>
+    </div>
+
+    <!-- SECTION 5: BEAUTY -->
+    <div class="section" id="s5">
+        <span class="section-num">5</span>
+        <h2>Nišinis šablonas — Grožio salonai</h2>
+
+        <div class="rule-box">
+            <strong>Nišos specifika:</strong> Grožio salonų savininkės (dažniausiai moterys) yra labai užimtos — dirba su klientais visą dieną ir neturi laiko atsakinėti į žinutes. Dažnai viena žmogus = ir meistras, ir administratorius. Skaudžiausias taškas: Instagram žinutės, kurios lieka neatsakytos valandas.
+        </div>
+
+        <div class="email-block">
+            <div class="email-header">
+                <span class="label">Grožio salonai — Email #1</span>
+                <span class="tag">Greičiausias startas</span>
+            </div>
+            <div class="email-subject">
+                <strong>Subject:</strong> Jūsų Instagram žinutės
+            </div>
+            <div class="email-body">Sveiki,
+
+Žiūrėjau <span class="var">[salono pavadinimas]</span> Instagram — puikūs darbai.
+
+Bet pastebėjau, kad klientai dažnai klausia apie kainas ir laisvus laikus komentaruose ir žinutėse. Kai dirbate su klientu — neįmanoma atsakyti iš karto.
+
+O jei klientė negauna atsakymo per 10 min. — ji tiesiog rašo kitam salonui.
+
+Mes padarėme AI asistentą, kuris atsako į jūsų klientų žinutes automatiškai — su jūsų kainomis, laisvais laikais ir net priima registracijas. 24/7, lietuviškai.
+
+Ar įdomu pamatyti kaip tai atrodo? Demo užtrunka 15 min.
+
+<span class="var">[Vardas]</span>
+Taktas.lt</div>
+        </div>
+
+        <h4>Personalizacijos taškai grožio salonams:</h4>
+        <ul>
+            <li>VISADA paminėk jų Instagram — tai jų gyvenimas. Pasakyk ką nors gero apie jų darbus.</li>
+            <li>Kalbėk apie registracijas, ne "klientus" — salonuose viskas sukasi apie booking</li>
+            <li>Paminėk savaitgalius: "Šeštadienį — pilna, sekmadienį — tuščia. O jei AI siūlytų sekmadienio laikus automatiškai?"</li>
+            <li>Upselling: "AI gali rekomenduoti papildomas paslaugas — pvz. prie kirpimo siūlyti dažymą"</li>
+        </ul>
+    </div>
+
+    <!-- SECTION 6: REAL ESTATE -->
+    <div class="section" id="s6">
+        <span class="section-num">6</span>
+        <h2>Nišinis šablonas — Nekilnojamasis turtas</h2>
+
+        <div class="rule-box">
+            <strong>Nišos specifika:</strong> NT agentai gauna DAUG užklausų, bet tik 10-20% yra rimti pirkėjai. Didžiausias skausmas — laiko švaistymas nekvalifikuotiems kontaktams. Kalbėk apie kvalifikavimą ir laiko taupymą, ne tik atsakymą.
+        </div>
+
+        <div class="email-block">
+            <div class="email-header">
+                <span class="label">Nekilnojamasis turtas — Email #1</span>
+                <span class="tag">Didžiausios sumos</span>
+            </div>
+            <div class="email-subject">
+                <strong>Subject:</strong> Kiek laiko švaistote nekvalifikuotiems klientams?
+            </div>
+            <div class="email-body">Sveiki,
+
+Dirbu su NT agentūromis ir matau tą pačią problemą — 80% užklausų yra "tik pasižiūrėti", bet jūs vis tiek skiriate laiką kiekvienam.
+
+O jeigu AI asistentas automatiškai:
+— Atsakytų į klausimus apie objektus 24/7
+— Rinktų kontaktus ir biudžetą
+— Perduotų jums TIK kvalifikuotus pirkėjus su pilnu kontekstu?
+
+<span class="var">[Agentūros pavadinimas]</span> galėtų sutaupyti <span class="var">[10-15]</span> valandų per savaitę ir dirbti tik su rimtais klientais.
+
+15 min. demo — parodysiu su jūsų objektais. Kada patogu?
+
+<span class="var">[Vardas]</span>
+Taktas.lt</div>
+        </div>
+
+        <h4>Personalizacijos taškai NT agentūroms:</h4>
+        <ul>
+            <li>Paminėk konkretų objektą iš jų svetainės: "Mačiau, kad turite 3 kambarių butą Šnipiškėse..."</li>
+            <li>Kalbėk apie kvalifikavimą, ne tik atsakymą — jie nori GERESNIŲ klientų, ne daugiau klientų</li>
+            <li>ROI kalba: "Vienas papildomas sandoris per mėnesį = 5,000-15,000€ komisinių"</li>
+            <li>Sezoniškumas: pavasaris/ruduo = pikas, žiema = ramu. Siųsk prieš sezoną.</li>
+        </ul>
+    </div>
+
+    <!-- SECTION 7: CONSTRUCTION -->
+    <div class="section" id="s7">
+        <span class="section-num">7</span>
+        <h2>Nišinis šablonas — Statybos ir renovacija</h2>
+
+        <div class="rule-box">
+            <strong>Nišos specifika:</strong> Statybų įmonių vadovai yra ant objektų visą dieną — neatsiliepia, neskaito ilgų laiškų. Labai trumpi, labai konkretūs laiškai. Skaudžiausias taškas: klientai prašo sąmatų, bet niekas neturi laiko jas ruošti greitai.
+        </div>
+
+        <div class="email-block">
+            <div class="email-header">
+                <span class="label">Statybos — Email #1</span>
+                <span class="tag">Didelis srautas</span>
+            </div>
+            <div class="email-subject">
+                <strong>Subject:</strong> Sąmatos per 2 minutes?
+            </div>
+            <div class="email-body">Sveiki,
+
+Vienas klausimas — kiek užklausų dėl sąmatų per mėnesį negaunate laiku apdoroti?
+
+Padarėme AI asistentą statybų įmonėms, kuris:
+— Automatiškai generuoja preliminarias sąmatas pagal kliento aprašymą
+— Renka kontaktus ir projekto detales 24/7
+— Perduoda jums paruoštą užklausą su visa informacija
+
+Vienas klientas per mėnesį papildomai = <span class="var">[8,000-20,000€]</span>.
+
+Ar verta 15 min.?
+
+<span class="var">[Vardas]</span>
+Taktas.lt</div>
+        </div>
+
+        <h4>Personalizacijos taškai statyboms:</h4>
+        <ul>
+            <li>Trumpi laiškai — šie žmonės ant objektų, skaito iš telefono</li>
+            <li>Kalbėk apie sąmatas ir užklausas — tai jų kasdienė problema</li>
+            <li>Paminėk sezoną: "Pavasaris artėja — užklausų bus dvigubai. Ar spėsite visas apdoroti?"</li>
+            <li><strong>Tavo pranašumas:</strong> Tu pats turi MEBA (statybų įmonę) — paminėk: "Pats turiu statybų įmonę, todėl suprantu jūsų kasdienius iššūkius"</li>
+        </ul>
+    </div>
+
+    <!-- SECTION 8: LAW -->
+    <div class="section" id="s8">
+        <span class="section-num">8</span>
+        <h2>Nišinis šablonas — Teisė ir finansai</h2>
+
+        <div class="rule-box">
+            <strong>Nišos specifika:</strong> Advokatai ir finansų specialistai vertina profesionalumą ir konfidencialumą. Jokio "bro" tono. Formalus, dalykiškas, trumpas. Skaudžiausias taškas: pirminė konsultacija užima 30-60 min., o 50% žmonių po to neperka.
+        </div>
+
+        <div class="email-block">
+            <div class="email-header">
+                <span class="label">Teisė ir finansai — Email #1</span>
+                <span class="tag">Aukšta konversija</span>
+            </div>
+            <div class="email-subject">
+                <strong>Subject:</strong> Pirminės konsultacijos automatizavimas
+            </div>
+            <div class="email-body">Laba diena,
+
+Kreipiuosi dėl galimybės sutaupyti <span class="var">[kontoros pavadinimas]</span> laiko, skiriamo pirminėms konsultacijoms.
+
+Sukūrėme AI asistentą teisinėms įmonėms, kuris:
+— Surenka kliento situacijos aprašymą prieš pirmą susitikimą
+— Klasifikuoja užklausą pagal sritį (šeimos, verslo, NT teisė ir t.t.)
+— Rezervuoja konsultacijos laiką kalendoriuje
+
+Rezultatas — advokatas gauna paruoštą bylą, o ne tuščią pirmą susitikimą.
+
+Ar galėčiau pristatyti per 15 min. vaizdo skambutį?
+
+Pagarbiai,
+<span class="var">[Vardas]</span>
+Taktas.lt</div>
+        </div>
+
+        <h4>Personalizacijos taškai teisei:</h4>
+        <ul>
+            <li><strong>Formalus tonas</strong> — "Laba diena" ne "Sveiki", "Pagarbiai" ne tik vardas</li>
+            <li>Paminėk jų specializaciją: "Matau, kad specializuojatės šeimos teisėje..."</li>
+            <li>Konfidencialumas: "Visi duomenys lieka jūsų serveryje, atitinka BDAR reikalavimus"</li>
+            <li>ROI: "Viena papildoma byla per mėnesį = 2,000-5,000€ honoraro"</li>
+        </ul>
+    </div>
+
+    <!-- SECTION 9: 8-WEEK STRATEGY -->
+    <div class="section" id="s9">
+        <span class="section-num">9</span>
+        <h2>8 savaičių strategija</h2>
+
+        <p>Pirmos 8 savaitės nustato ritmą visam verslui. Laikykis šio plano <strong>be nukrypimų</strong>.</p>
+
+        <div class="metrics">
+            <div class="metric"><div class="num">54</div><div class="lbl">Turimi kontaktai</div></div>
+            <div class="metric"><div class="num">10-15<em>%</em></div><div class="lbl">Tikėtinas atsakymų rodiklis</div></div>
+            <div class="metric"><div class="num">3-5<em>%</em></div><div class="lbl">Tikėtina konversija</div></div>
+            <div class="metric"><div class="num">2-3</div><div class="lbl">Klientai per 8 sav.</div></div>
+        </div>
+
+        <div class="timeline">
+            <div class="week">
+                <div class="week-header">
+                    <span class="week-title">Savaitė 1 — Setup ir šildymas</span>
+                    <span class="week-target">0 pardavimų laiškai</span>
+                </div>
+                <ul>
+                    <li><strong>Pirmadienis-antradienis:</strong> Sukurk info@taktas.lt el. paštą. Sukonfigūruok SPF, DKIM, DMARC.</li>
+                    <li><strong>Trečiadienis-ketvirtadienis:</strong> Nusiųsk 10 laiškų draugams/kolegoms — normalūs pokalbiai, ne šablonai. Tai "šildo" domeną.</li>
+                    <li><strong>Penktadienis:</strong> Paruošk visus 5 email šablonus kiekvienai nišai. Personalizuok pirmus 12 laiškų (odontologija).</li>
+                    <li><strong>Savaitgalis:</strong> Sukurk 60s demo video (screen recording su Loom/OBS) — parodyk chatbot veikimą.</li>
+                </ul>
+            </div>
+
+            <div class="week">
+                <div class="week-header">
+                    <span class="week-title">Savaitė 2 — Pirma banga: Odontologija</span>
+                    <span class="week-target">12 Email #1 išsiųsta</span>
+                </div>
+                <ul>
+                    <li><strong>Pirmadienis:</strong> Išsiųsk Email #1 visiems 12 odontologijos kontaktų (po 6/dieną, pirma ir antra dienos dalis).</li>
+                    <li><strong>Trečiadienis:</strong> Išsiųsk Email #2 (follow-up) tiems, kas neatsakė.</li>
+                    <li><strong>Ketvirtadienis-penktadienis:</strong> Personalizuok 12 grožio salonų laiškų (kitai savaitei).</li>
+                    <li><strong>Nuolat:</strong> Stebėk atsakymus. Jei kas atsako — reaguok per 1 VALANDĄ (ne dieną, ne rytoj — dabar).</li>
+                </ul>
+            </div>
+
+            <div class="week">
+                <div class="week-header">
+                    <span class="week-title">Savaitė 3 — Antra banga: Grožio salonai + Odontologijos tęsinys</span>
+                    <span class="week-target">12 naujų + follow-up</span>
+                </div>
+                <ul>
+                    <li><strong>Pirmadienis:</strong> Email #3 odontologijai (kas neatsakė). Email #1 grožio salonams.</li>
+                    <li><strong>Trečiadienis:</strong> Email #2 grožio salonams.</li>
+                    <li><strong>Penktadienis:</strong> Personalizuok NT agentūrų laiškus.</li>
+                    <li><strong>Tikėtinas rezultatas:</strong> 2-4 atsakymai, 1-2 demo skambučiai suplanuoti.</li>
+                </ul>
+            </div>
+
+            <div class="week">
+                <div class="week-header">
+                    <span class="week-title">Savaitė 4 — Trečia banga: NT + Statybos</span>
+                    <span class="week-target">20 naujų + follow-up</span>
+                </div>
+                <ul>
+                    <li><strong>Pirmadienis:</strong> Email #1 NT agentūroms (10) + statybų įmonėms (10).</li>
+                    <li><strong>Trečiadienis:</strong> Follow-up anksčiau pradėtoms sekoms.</li>
+                    <li><strong>Ketvirtadienis:</strong> Email #4 (FOMO) odontologijai — kas vis dar neatsakė.</li>
+                    <li><strong>Penktadienis:</strong> Personalizuok teisės sektoriaus laiškus.</li>
+                    <li><strong>Tikėtinas rezultatas:</strong> 1-2 demo skambučiai atlikti, pirmas klientas artėja.</li>
+                </ul>
+            </div>
+
+            <div class="week">
+                <div class="week-header">
+                    <span class="week-title">Savaitė 5 — Ketvirta banga: Teisė + Break-up emails</span>
+                    <span class="week-target">10 naujų + break-up</span>
+                </div>
+                <ul>
+                    <li><strong>Pirmadienis:</strong> Email #1 teisės kontaktams (10). Email #5 (break-up) odontologijai.</li>
+                    <li><strong>Trečiadienis:</strong> Follow-up grožio salonams ir NT.</li>
+                    <li><strong>Penktadienis:</strong> Apžvelk rezultatus — kas veikė, kas ne. Koreguok šablonus.</li>
+                    <li><strong>Tikėtinas rezultatas:</strong> PIRMAS KLIENTAS pasirašo. Break-up emails generuoja 2-3 atsakymus.</li>
+                </ul>
+            </div>
+
+            <div class="week">
+                <div class="week-header">
+                    <span class="week-title">Savaitė 6 — Naujų kontaktų paieška</span>
+                    <span class="week-target">30 naujų kontaktų surasta</span>
+                </div>
+                <ul>
+                    <li><strong>Pirmadienis-trečiadienis:</strong> Surask 30 NAUJŲ kontaktų (kitos klinikos, salonai, įmonės).</li>
+                    <li><strong>Ketvirtadienis-penktadienis:</strong> Pradėk sekas naujiems kontaktams.</li>
+                    <li><strong>Tęsk:</strong> Follow-up esamoms sekoms pagal grafiką.</li>
+                    <li><strong>Tikėtinas rezultatas:</strong> 2-3 klientai bendrai, pirmas klientas jau veikia.</li>
+                </ul>
+            </div>
+
+            <div class="week">
+                <div class="week-header">
+                    <span class="week-title">Savaitė 7 — Optimizavimas</span>
+                    <span class="week-target">Tobulinti procesą</span>
+                </div>
+                <ul>
+                    <li><strong>Analizuok:</strong> Kuris subject line turėjo geriausią open rate? Kuri niša geriausiai reagavo?</li>
+                    <li><strong>A/B testuok:</strong> Pakeisk subject line arba pirmą sakinį 50% naujų laiškų — palygink rezultatus.</li>
+                    <li><strong>Case study:</strong> Jei turi veikiantį klientą — paprašyk leidimo naudoti kaip pavyzdį. Tai 10x pagerins konversiją.</li>
+                    <li><strong>Tikėtinas rezultatas:</strong> 3-4 klientai, aiškus supratimas kas veikia.</li>
+                </ul>
+            </div>
+
+            <div class="week">
+                <div class="week-header">
+                    <span class="week-title">Savaitė 8 — Skalė</span>
+                    <span class="week-target">Sistemizuoti ir kartoti</span>
+                </div>
+                <ul>
+                    <li><strong>Surask dar 50 kontaktų</strong> geriausiai veikiančiose nišose.</li>
+                    <li><strong>Automatizuok:</strong> Apsvarstyk email automation tool (Instantly.ai, Lemlist, arba Smartlead).</li>
+                    <li><strong>Referral programa:</strong> Pasiūlyk esamiems klientams: "Rekomenduok mus kolegai — gausite mėnesį nemokamai".</li>
+                    <li><strong>Tikėtinas rezultatas:</strong> 4-5 mokantys klientai = 1,200-2,500€/mėn. MRR. Sistema veikia.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- SECTION 10: KPIs -->
+    <div class="section" id="s10">
+        <span class="section-num">10</span>
+        <h2>KPI ir metrikos</h2>
+
+        <p>Stebėk šiuos skaičius <strong>kiekvieną savaitę</strong>:</p>
+
+        <table>
+            <thead>
+                <tr><th>Metrika</th><th>Tikslas</th><th>Geras rezultatas</th><th>Blogas rezultatas</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>Open rate (atidarymo rodiklis)</td><td>40%+</td><td>50%+ = puikus subject line</td><td>&lt;25% = keisk subject line</td></tr>
+                <tr><td>Reply rate (atsakymų rodiklis)</td><td>10%+</td><td>15%+ = geras šablonas</td><td>&lt;5% = keisk turinį</td></tr>
+                <tr><td>Positive reply rate</td><td>5%+</td><td>8%+ = puiki niša</td><td>&lt;2% = keisk nišą</td></tr>
+                <tr><td>Demo call booked</td><td>50% iš positive replies</td><td>70%+ = geras pitch</td><td>&lt;30% = per daug "gal vėliau"</td></tr>
+                <tr><td>Demo → klientas</td><td>30%+</td><td>50%+ = puikus demo</td><td>&lt;20% = tobulink demo</td></tr>
+                <tr><td>Laiškų/dieną</td><td>20-30</td><td>25 = optimalus</td><td>&lt;10 = per lėtai, &gt;40 = spam rizika</td></tr>
+            </tbody>
+        </table>
+
+        <h3>Mėnesinis tikslas (po 8 savaičių):</h3>
+        <table>
+            <thead>
+                <tr><th>Mėnuo</th><th>Laiškų/mėn.</th><th>Nauji kontaktai</th><th>Demo skambučiai</th><th>Nauji klientai</th><th>MRR</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>Mėnuo 1-2</td><td>300-400</td><td>54 (starter list)</td><td>5-8</td><td>2-3</td><td>600-1,200€</td></tr>
+                <tr><td>Mėnuo 3</td><td>500</td><td>+50 naujų</td><td>8-12</td><td>3-5</td><td>1,800-3,200€</td></tr>
+                <tr><td>Mėnuo 4-6</td><td>600/mėn.</td><td>+50/mėn.</td><td>10-15/mėn.</td><td>4-6/mėn.</td><td>5,000-10,000€</td></tr>
+                <tr><td>Mėnuo 7-12</td><td>600/mėn. + referral</td><td>+30/mėn. + referral</td><td>15-20/mėn.</td><td>6-10/mėn.</td><td>15,000-30,000€</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- SECTION 11: REPLY HANDLING -->
+    <div class="section" id="s11">
+        <span class="section-num">11</span>
+        <h2>Follow-up taisyklės ir atsakymų šablonai</h2>
+
+        <h3>Kai atsako "Įdomu, papasakokit daugiau":</h3>
+        <div class="email-block">
+            <div class="email-header">
+                <span class="label">Atsakymas — Teigiamas susidomėjimas</span>
+                <span class="tag">Atsakyk per 1h</span>
+            </div>
+            <div class="email-body">Puiku! Ačiū už atsakymą.
+
+Geriausias būdas — trumpas 15 min. video skambutis, kurio metu parodysiu demo su jūsų paslaugomis ir kainomis. Jūs matysite tiksliai kaip tai atrodytų jūsų klientams.
+
+Ar tiktų šią savaitę? Siūlau:
+— <span class="var">[Antradienis 10:00]</span>
+— <span class="var">[Ketvirtadienis 14:00]</span>
+
+Kuris laikas patogesnis?
+
+<span class="var">[Vardas]</span></div>
+        </div>
+
+        <h3>Kai atsako "Kiek kainuoja?":</h3>
+        <div class="email-block">
+            <div class="email-header">
+                <span class="label">Atsakymas — Kainos klausimas</span>
+                <span class="tag">Neduok kainos iš karto</span>
+            </div>
+            <div class="email-body">Ačiū už klausimą!
+
+Kaina priklauso nuo kelių dalykų — kiek kanalų norite (svetainė, Facebook, Instagram), kiek pokalbių per mėnesį ir kokias integracijas reikia.
+
+Dažniausiai mūsų klientai moka 199-399€/mėn. — tai mažiau nei vienos administratorės algos dalis.
+
+Bet prieš kalbant apie kainą — leiskite per 15 min. parodyti demo su jūsų verslu. Po to kaina bus daug aiškesnė ir turės kontekstą.
+
+Ar tiktų <span class="var">[data/laikas]</span>?
+
+<span class="var">[Vardas]</span></div>
+        </div>
+
+        <h3>Kai atsako "Ne, ačiū" arba "Neaktualu":</h3>
+        <div class="email-block">
+            <div class="email-header">
+                <span class="label">Atsakymas — Neigiamas atsakymas</span>
+                <span class="tag">Būk malonus, neuždark durų</span>
+            </div>
+            <div class="email-body">Suprantu, ačiū kad atsakėte!
+
+Jei ateityje situacija pasikeistų — tiesiog parašykite. Visada galėsime rasti 15 min. trumpam demo.
+
+Sėkmės su <span class="var">[įmonės pavadinimas]</span>!
+
+<span class="var">[Vardas]</span></div>
+        </div>
+
+        <h3>Kai atsako "Jau turime chatbotą / sprendimą":</h3>
+        <div class="email-block">
+            <div class="email-header">
+                <span class="label">Atsakymas — Jau turi sprendimą</span>
+                <span class="tag">Diferencijuok</span>
+            </div>
+            <div class="email-body">Puiku, kad jau investuojate į tai!
+
+Tik smalsumas — ar jūsų dabartinis sprendimas:
+— Kalba lietuviškai natūraliai (ne vertimas)?
+— Registruoja klientus tiesiogiai į kalendorių?
+— Veikia ir Facebook/Instagram žinutėse?
+
+Jei bent vienas "ne" — gal vertėtų palyginti. 15 min. demo nieko nekainuoja, o gal rasite kur dabartinis sprendimas galėtų būti geresnis.
+
+<span class="var">[Vardas]</span></div>
+        </div>
+
+        <div class="rule-box">
+            <strong>Auksinė atsakymų taisyklė:</strong> Niekada nesiginčyk. Niekada nekritikuok jų dabartinio sprendimo. Visada būk pozityvus ir profesionalus. Net jei šiandien pasakė "ne" — po 3 mėnesių gali parašyti "o ta demo vis dar galima?". Kiekvienas kontaktas = ilgalaikis ryšys.
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>Taktas Sales Playbook v1.0 &mdash; 2026-03-18 &mdash; Konfidencialu</p>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,839 @@
+<!DOCTYPE html>
+<html lang="lt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Taktas — Cold Calling Playbook & Phone Sales System</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', -apple-system, sans-serif; background: #f8f9fa; color: #1a1a2e; line-height: 1.65; padding: 2rem; }
+        .container { max-width: 900px; margin: 0 auto; }
+        .header { text-align: center; margin-bottom: 3rem; padding-bottom: 2rem; border-bottom: 3px solid #FF6B35; }
+        .header h1 { font-size: 2.2rem; font-weight: 900; letter-spacing: -1px; margin-bottom: 0.25rem; }
+        .header h1 span { color: #FF6B35; }
+        .header .sub { color: #666; font-size: 0.95rem; margin-bottom: 1rem; }
+        .header .version { display: inline-block; background: #1a1a2e; color: #FF6B35; padding: 0.2rem 0.8rem; border-radius: 4px; font-size: 0.75rem; font-weight: 700; }
+
+        .toc { background: #fff; border: 1px solid #e0e0e0; border-radius: 10px; padding: 1.5rem 2rem; margin-bottom: 2.5rem; }
+        .toc h3 { font-size: 1rem; margin-bottom: 0.75rem; }
+        .toc ol { padding-left: 1.25rem; }
+        .toc li { padding: 0.2rem 0; font-size: 0.9rem; }
+        .toc a { color: #4F46E5; text-decoration: none; }
+        .toc a:hover { text-decoration: underline; }
+
+        .section { margin-bottom: 3rem; }
+        .section-num { display: inline-block; background: #FF6B35; color: #fff; width: 28px; height: 28px; border-radius: 6px; text-align: center; line-height: 28px; font-size: 0.8rem; font-weight: 900; margin-right: 0.5rem; vertical-align: middle; }
+        h2 { font-size: 1.4rem; font-weight: 900; margin-bottom: 1rem; color: #1a1a2e; display: inline; vertical-align: middle; }
+        h3 { font-size: 1.1rem; font-weight: 800; margin: 1.5rem 0 0.75rem; color: #1a1a2e; }
+        h4 { font-size: 0.95rem; font-weight: 700; margin: 1rem 0 0.5rem; color: #FF6B35; }
+        .section > p, .section > ul, .section > ol { margin-bottom: 1rem; font-size: 0.92rem; }
+        .section ul, .section ol { padding-left: 1.5rem; }
+        .section li { margin-bottom: 0.35rem; font-size: 0.92rem; }
+
+        .rule-box { background: #fff; border-left: 4px solid #FF6B35; border-radius: 0 8px 8px 0; padding: 1rem 1.25rem; margin: 1rem 0; font-size: 0.9rem; }
+        .rule-box strong { color: #1a1a2e; }
+        .tip-box { background: #f0fdf4; border-left: 4px solid #00E59B; border-radius: 0 8px 8px 0; padding: 1rem 1.25rem; margin: 1rem 0; font-size: 0.9rem; }
+        .warning-box { background: #fff8e0; border-left: 4px solid #F59E0B; border-radius: 0 8px 8px 0; padding: 1rem 1.25rem; margin: 1rem 0; font-size: 0.9rem; }
+        .danger-box { background: #fff0f0; border-left: 4px solid #FF4444; border-radius: 0 8px 8px 0; padding: 1rem 1.25rem; margin: 1rem 0; font-size: 0.9rem; }
+
+        /* Script blocks */
+        .script-block { background: #fff; border: 1px solid #e0e0e0; border-radius: 10px; margin: 1.25rem 0; overflow: hidden; }
+        .script-header { background: #1a1a2e; color: #fff; padding: 0.6rem 1.25rem; display: flex; justify-content: space-between; align-items: center; }
+        .script-header .label { font-size: 0.75rem; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; }
+        .script-header .tag { background: #FF6B35; color: #fff; padding: 0.15rem 0.5rem; border-radius: 4px; font-size: 0.65rem; font-weight: 800; }
+        .script-body { padding: 1.25rem; font-size: 0.88rem; line-height: 1.8; color: #333; }
+        .script-body .you { color: #FF6B35; font-weight: 700; }
+        .script-body .them { color: #4F46E5; font-weight: 700; }
+        .script-body .note { background: #fff8e0; padding: 0.2rem 0.4rem; border-radius: 3px; font-size: 0.82rem; font-style: italic; color: #8B6914; }
+        .script-body .pause { color: #999; font-style: italic; font-size: 0.82rem; }
+        .script-body .var { background: #e8f5e9; color: #2e7d32; padding: 0.1rem 0.3rem; border-radius: 3px; font-weight: 600; font-size: 0.85rem; }
+
+        /* Objection handler */
+        .objection { background: #fff; border: 1px solid #e0e0e0; border-radius: 8px; margin: 0.75rem 0; overflow: hidden; }
+        .objection-q { background: #fef2f2; padding: 0.6rem 1rem; font-size: 0.88rem; font-weight: 700; color: #991b1b; }
+        .objection-a { padding: 0.75rem 1rem; font-size: 0.88rem; color: #333; line-height: 1.6; }
+
+        table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.85rem; }
+        th { background: #1a1a2e; color: #fff; padding: 0.6rem 0.75rem; text-align: left; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.5px; }
+        td { padding: 0.55rem 0.75rem; border-bottom: 1px solid #f0f0f0; }
+        tr:nth-child(even) td { background: #f8f9fa; }
+
+        .week { background: #fff; border: 1px solid #e0e0e0; border-radius: 10px; padding: 1.25rem; margin-bottom: 1rem; }
+        .week-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem; padding-bottom: 0.5rem; border-bottom: 1px solid #f0f0f0; }
+        .week-title { font-size: 1rem; font-weight: 800; }
+        .week-target { background: #FF6B35; color: #fff; padding: 0.2rem 0.6rem; border-radius: 4px; font-size: 0.7rem; font-weight: 800; }
+
+        .metrics { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 0.75rem; margin: 1rem 0; }
+        .metric { background: #fff; border: 1px solid #e0e0e0; border-radius: 8px; padding: 1rem; text-align: center; }
+        .metric .num { font-size: 1.5rem; font-weight: 900; color: #1a1a2e; }
+        .metric .num em { font-style: normal; color: #FF6B35; }
+        .metric .lbl { font-size: 0.7rem; color: #888; text-transform: uppercase; letter-spacing: 0.5px; margin-top: 0.15rem; }
+
+        /* Daily schedule */
+        .schedule { display: grid; grid-template-columns: 80px 1fr; gap: 0; margin: 1rem 0; }
+        .time-slot { padding: 0.5rem 0.75rem; font-size: 0.8rem; font-weight: 700; color: #FF6B35; border-right: 2px solid #FF6B35; text-align: right; }
+        .activity { padding: 0.5rem 0.75rem; font-size: 0.85rem; border-bottom: 1px solid #f0f0f0; }
+
+        .footer { text-align: center; margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid #e0e0e0; color: #999; font-size: 0.8rem; }
+
+        @media print {
+            body { padding: 0.5rem; background: #fff; }
+            .section { page-break-inside: avoid; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+
+    <div class="header">
+        <h1>Tak<span>tas</span> Cold Calling Playbook</h1>
+        <p class="sub">Phone Sales System &mdash; Call Scripts &mdash; Objection Handling &mdash; Daily Strategy</p>
+        <span class="version">v1.0 &mdash; 2026-03-18</span>
+    </div>
+
+    <div class="toc">
+        <h3>Turinys</h3>
+        <ol>
+            <li><a href="#s1">Cold call psichologija — kodėl telefonas veikia geriau nei email</a></li>
+            <li><a href="#s2">Auksinės skambučių taisyklės</a></li>
+            <li><a href="#s3">Universalus cold call skriptas (pilnas)</a></li>
+            <li><a href="#s4">Gatekeeper bypass — kaip praeiti pro sekretorę</a></li>
+            <li><a href="#s5">Nišinis skriptas — Odontologija</a></li>
+            <li><a href="#s6">Nišinis skriptas — Grožio salonai</a></li>
+            <li><a href="#s7">Nišinis skriptas — Nekilnojamasis turtas</a></li>
+            <li><a href="#s8">Nišinis skriptas — Statybos ir renovacija</a></li>
+            <li><a href="#s9">Nišinis skriptas — Teisė ir finansai</a></li>
+            <li><a href="#s10">Prieštaravimų valdymas — 15 dažniausių ir kaip atsakyti</a></li>
+            <li><a href="#s11">Idealios dienos struktūra</a></li>
+            <li><a href="#s12">8 savaičių skambučių strategija</a></li>
+            <li><a href="#s13">KPI, metrikos ir tikslai</a></li>
+            <li><a href="#s14">Follow-up po skambučio</a></li>
+            <li><a href="#s15">Voicemail skriptai</a></li>
+        </ol>
+    </div>
+
+    <!-- S1: PSYCHOLOGY -->
+    <div class="section" id="s1">
+        <span class="section-num">1</span>
+        <h2>Kodėl telefonas veikia geriau nei email</h2>
+
+        <div class="metrics">
+            <div class="metric"><div class="num">2<em>%</em></div><div class="lbl">Email atsakymo rodiklis</div></div>
+            <div class="metric"><div class="num">15<em>%</em></div><div class="lbl">Cold call pokalbio rodiklis</div></div>
+            <div class="metric"><div class="num">8<em>x</em></div><div class="lbl">Greičiau nei email</div></div>
+            <div class="metric"><div class="num">1</div><div class="lbl">Skambutis = 10 email</div></div>
+        </div>
+
+        <p>Lietuvos rinkoje cold calling veikia ypač gerai, nes:</p>
+        <ul>
+            <li><strong>Mažos įmonės = savininkas atsako pats.</strong> Nėra 5 lygių gatekeeper'ių kaip korporacijose.</li>
+            <li><strong>Lietuviai vertina tiesioginį kontaktą.</strong> Email gali ignoruoti. Telefonu — sunkiau.</li>
+            <li><strong>Smulkus verslas nežino apie AI.</strong> Jiems reikia PAPASAKOTI, ne parašyti. Balsas kuria pasitikėjimą.</li>
+            <li><strong>Greitis.</strong> Per 2 valandas skambučių gali pasiekti tai, kam email reikia 2 savaičių.</li>
+        </ul>
+
+        <div class="tip-box">
+            <strong>Geriausias būdas:</strong> Email pirma (dieną prieš), skambutis antrą dieną. "Sveiki, vakar rašiau jums el. laišką dėl..." — tai 3x padidina pokalbio tikimybę.
+        </div>
+    </div>
+
+    <!-- S2: GOLDEN RULES -->
+    <div class="section" id="s2">
+        <span class="section-num">2</span>
+        <h2>Auksinės skambučių taisyklės</h2>
+
+        <div class="rule-box"><strong>Taisyklė #1: Pirmos 10 sekundžių nusprendžia viską.</strong> Jei per 10s nesi sukėlęs smalsumo — jie padės ragelį. Niekada nepradėk nuo "Noriu pasiūlyti..."</div>
+        <div class="rule-box"><strong>Taisyklė #2: Klausk, nekalbėk.</strong> Geras cold call = 70% klauso, 30% kalba. Kiekvienas tavo sakinys turi baigtis klausimu.</div>
+        <div class="rule-box"><strong>Taisyklė #3: Stok.</strong> Skambink stovėdamas. Tai keičia balso toną — tampi energingesnis ir pasitikintis. Tai mokslas, ne ezoterika.</div>
+        <div class="rule-box"><strong>Taisyklė #4: Šypsokis.</strong> Žmogus girdi šypseną balse. Prieš kiekvieną skambutį — šypsokis 3 sekundes. Keista, bet veikia.</div>
+        <div class="rule-box"><strong>Taisyklė #5: Tikslas nėra pardavimas.</strong> Cold call tikslas = susitarti dėl demo skambučio. Niekada nebandyk parduoti telefonu. Tik susitarti dėl kito žingsnio.</div>
+        <div class="rule-box"><strong>Taisyklė #6: 3 "Ne" taisyklė.</strong> Nustok tik po 3 "ne". Pirmas "ne" = refleksas. Antras "ne" = dar nežino. Trečias "ne" = tikrai ne. Bet mandagiai, be spaudimo.</div>
+        <div class="rule-box"><strong>Taisyklė #7: Skambink blokais.</strong> 25 skambučiai iš eilės be pertraukos. Pertrauka = prarandamas momentumas. Po 25 — 5 min. pauzė, ir vėl.</div>
+
+        <div class="danger-box">
+            <strong>NIEKADA:</strong> Neskaityk skripto žodis žodžiu — tai girdisi. Žinok jį mintinai ir kalbėk natūraliai. Niekada nesakyk "Aš jums trukdau" arba "Ar turite minutę?" — tai kviečia sakyti "ne". Neskambink pirmadienio rytą ir penktadienio popietę.
+        </div>
+    </div>
+
+    <!-- S3: UNIVERSAL SCRIPT -->
+    <div class="section" id="s3">
+        <span class="section-num">3</span>
+        <h2>Universalus cold call skriptas</h2>
+
+        <p>Šis skriptas turi <strong>5 fazes</strong>. Kiekviena fazė turi konkretų tikslą. Mokykis ne žodžius, o struktūrą.</p>
+
+        <div class="script-block">
+            <div class="script-header">
+                <span class="label">Fazė 1 — Atidarymas (10 sekundžių)</span>
+                <span class="tag">Tikslas: Nelpadėti ragelį</span>
+            </div>
+            <div class="script-body">
+<span class="you">TU:</span> Laba diena, čia <span class="var">[Vardas]</span> iš Taktas. Skambinu dėl vieno konkretaus dalyko — ar galiu 30 sekundžių?
+
+<span class="pause">[Pauzė — leisk jiems atsakyti]</span>
+
+<span class="note">KODĖL VEIKIA: "30 sekundžių" — niekas neatsisako 30 sekundžių. "Vieno konkretaus dalyko" — sukelia smalsumą. Nenaudoji žodžio "pasiūlymas".</span>
+            </div>
+        </div>
+
+        <div class="script-block">
+            <div class="script-header">
+                <span class="label">Fazė 2 — Kontekstas + skausmo klausimas (20 sekundžių)</span>
+                <span class="tag">Tikslas: Sukelti "taip, turiu šitą problemą"</span>
+            </div>
+            <div class="script-body">
+<span class="you">TU:</span> Dirbu su <span class="var">[srities]</span> įmonėmis Lietuvoje ir pastebiu, kad daugumos problema ta pati — klientai rašo po darbo valandų, bet niekas neatsako, ir jie nuėina pas konkurentus.
+
+Ar jums irgi taip nutinka?
+
+<span class="pause">[Pauzė — LAUKK. Jie kalba. Tu klausaisi.]</span>
+
+<span class="note">KODĖL VEIKIA: Tu nesakai "turiu produktą". Tu aprašai JŲ problemą. Kai jie sako "taip" arba papasakoja savo situaciją — turi leidimą kalbėti toliau.</span>
+            </div>
+        </div>
+
+        <div class="script-block">
+            <div class="script-header">
+                <span class="label">Fazė 3 — Vertės pasiūlymas (20 sekundžių)</span>
+                <span class="tag">Tikslas: Sukelti "kaip tai veikia?"</span>
+            </div>
+            <div class="script-body">
+<span class="you">TU:</span> Taigi ką mes padarėme — sukūrėme AI asistentą, kuris atsako jūsų klientams automatiškai per 3 sekundes, 24/7, lietuviškai. Su jūsų kainomis, paslaugomis ir laisvais laikais.
+
+<span class="var">[Srities]</span> įmonės, kurios tai naudoja, gauna vidutiniškai <span class="var">[+15]</span> papildomų <span class="var">[klientų/pacientų/registracijų]</span> per mėnesį.
+
+<span class="note">KODĖL VEIKIA: Konkretūs skaičiai + konkreti nauda. Ne "mes galime padėti", o "įmonės gauna +15 pacientų". Didelis skirtumas.</span>
+            </div>
+        </div>
+
+        <div class="script-block">
+            <div class="script-header">
+                <span class="label">Fazė 4 — Kvalifikavimas (30 sekundžių)</span>
+                <span class="tag">Tikslas: Suprasti ar jie tinka</span>
+            </div>
+            <div class="script-body">
+<span class="you">TU:</span> Prieš einant toliau — leiskite paklausti porą klausimų, kad suprasčiau ar tai tiktų jūsų verslui:
+
+1. Maždaug kiek užklausų per savaitę gaunate — per svetainę, telefoną, socialinius tinklus?
+2. Ar turite žmogų, kuris atsako į užklausas, ar darote patys?
+3. Kas atsako po darbo valandų ir savaitgaliais?
+
+<span class="pause">[Klausaisi. Užsirašai. Kartoji jų žodžius: "Suprantu, tai jūs sakote kad..."]</span>
+
+<span class="note">KODĖL VEIKIA: Tu ne parduodi — tu KVALIFIKUOJI. Tai keičia dinamiką. Jie nesijaučia spaudžiami. Ir tu sužinai tikrą skausmą.</span>
+            </div>
+        </div>
+
+        <div class="script-block">
+            <div class="script-header">
+                <span class="label">Fazė 5 — Uždarymas (15 sekundžių)</span>
+                <span class="tag">Tikslas: Susitarti dėl demo</span>
+            </div>
+            <div class="script-body">
+<span class="you">TU:</span> Klausykite, aš matau kad čia tikrai yra kur Taktas galėtų padėti. Siūlau taip — padarykime trumpą 15 minučių video skambutį, kurio metu parodysiu demo būtent su jūsų <span class="var">[paslaugomis/kainomis/objektais]</span>. Jūs matysite tiksliai kaip tai atrodytų jūsų klientui.
+
+Ar tiktų <strong>šis ketvirtadienis 10 ryto</strong>, ar geriau <strong>penktadienis po pietų</strong>?
+
+<span class="pause">[Pauzė — TYLĖK kol atsako. Kas pirmas prabyla — pralaimi.]</span>
+
+<span class="note">KODĖL VEIKIA: "Šis ketvirtadienis ar penktadienis" — ne "ar norite?" (galima sakyti ne), o "kada?" (galima tik rinktis laiką). Klasikinė "alternative close" technika.</span>
+            </div>
+        </div>
+
+        <div class="tip-box">
+            <strong>Pro tip:</strong> Visas skambutis — max 3-4 minutės. Jei pokalbis trunka ilgiau nei 5 min. — puiku, jie susidomėję. Bet niekada nebandyk užlaikyti jei nori baigti.
+        </div>
+    </div>
+
+    <!-- S4: GATEKEEPER -->
+    <div class="section" id="s4">
+        <span class="section-num">4</span>
+        <h2>Gatekeeper bypass — kaip praeiti pro sekretorę</h2>
+
+        <p>Mažose Lietuvos įmonėse dažnai atsako pats savininkas. Bet jei atsako administratorė/sekretorė:</p>
+
+        <div class="script-block">
+            <div class="script-header">
+                <span class="label">Gatekeeper skriptas #1 — Autoritetingas</span>
+                <span class="tag">Veikia geriausiai</span>
+            </div>
+            <div class="script-body">
+<span class="them">SEKRETORĖ:</span> Laba diena, <span class="var">[įmonės pavadinimas]</span>.
+
+<span class="you">TU:</span> Laba diena, čia <span class="var">[Vardas]</span>. Ar galiu pasiekti <span class="var">[savininko vardą]</span>?
+
+<span class="them">SEKRETORĖ:</span> O dėl ko skambinate?
+
+<span class="you">TU:</span> Dėl klientų užklausų aptarnavimo — jis/ji laukia mano skambučio.
+
+<span class="note">PASTABA: Jei žinai savininko vardą (iš LinkedIn, svetainės) — naudok. Tai iš karto suteikia autoritetą. "Jis/ji laukia" — ne melas, jei prieš tai siuntei email. Techniškai — laukia.</span>
+            </div>
+        </div>
+
+        <div class="script-block">
+            <div class="script-header">
+                <span class="label">Gatekeeper skriptas #2 — Draugiškas</span>
+                <span class="tag">Alternatyva</span>
+            </div>
+            <div class="script-body">
+<span class="them">SEKRETORĖ:</span> O dėl ko skambinate?
+
+<span class="you">TU:</span> Turime technologiją, kuri padeda <span class="var">[srities]</span> įmonėms automatiškai atsakyti į klientų užklausas. Norėjau trumpai aptarti su žmogumi, kuris priima sprendimus dėl klientų aptarnavimo — kas tai būtų pas jus?
+
+<span class="note">PASTABA: "Kas tai būtų" — ne "ar galiu", o "kas". Prielaida, kad jie sujungs.</span>
+            </div>
+        </div>
+
+        <div class="script-block">
+            <div class="script-header">
+                <span class="label">Gatekeeper skriptas #3 — Jei nesujungia</span>
+                <span class="tag">Paskutinis šansas</span>
+            </div>
+            <div class="script-body">
+<span class="them">SEKRETORĖ:</span> Jis/ji dabar užimtas. Galiu perduoti žinutę.
+
+<span class="you">TU:</span> Puiku, ačiū! Prašau perduokite, kad skambino <span class="var">[Vardas]</span> iš Taktas dėl AI asistento, kuris galėtų padėti priimti klientų registracijas po darbo valandų. Perskambinsiu rytoj apie <span class="var">[laikas]</span> — ar tai būtų patogus metas?
+
+<span class="note">PASTABA: Tu kontroliuoji follow-up. Ne "jis perskambins", o "AŠ perskambinsiu". Ir gauni konkretų laiką.</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- S5: DENTAL -->
+    <div class="section" id="s5">
+        <span class="section-num">5</span>
+        <h2>Nišinis skriptas — Odontologija</h2>
+
+        <div class="rule-box"><strong>Tonas:</strong> Profesionalus, bet draugiškas. Kalbėk kaip verslo konsultantas, ne pardavėjas. Žodžiai: pacientai, vizitai, neatvykimai, registracija, laisvi laikai.</div>
+
+        <div class="script-block">
+            <div class="script-header">
+                <span class="label">Odontologijos pilnas skriptas</span>
+                <span class="tag">3-4 min.</span>
+            </div>
+            <div class="script-body">
+<span class="you">TU:</span> Laba diena, čia <span class="var">[Vardas]</span> iš Taktas. Skambinu dėl vieno konkretaus dalyko — ar galiu 30 sekundžių?
+
+<span class="them">KLINIKA:</span> Taip, sakykite.
+
+<span class="you">TU:</span> Dirbu su odontologijos klinikomis Lietuvoje ir matau vieną problemą, kuri kartojasi — 60% pacientų ieško odontologo vakare, po darbo valandų. Skambina arba rašo. Bet dauguma klinikų tuo metu neturi kas atsako.
+
+Ar <span class="var">[klinikos pavadinimas]</span> irgi gaunate užklausų po 18 valandos?
+
+<span class="them">KLINIKA:</span> <span class="pause">[Dažniausiai: "Na taip, būna..." arba "Registratorė dirba iki 17/18"]</span>
+
+<span class="you">TU:</span> Taip, būtent. Ir problema ta, kad pacientas, kuris negauna atsakymo per 5 minutes — jis tiesiog skambina kitai klinikai. O vienas prarastas pacientas — tai gali būti 300, 500, o jei implantai — ir 3,000 eurų.
+
+Tai ką mes padarėme — sukūrėme AI registratorę, kuri dirba 24/7, atsako lietuviškai, žino jūsų paslaugas ir kainas, ir registruoja pacientus tiesiogiai į jūsų kalendorių. Klinikos, kurios tai naudoja, gauna vidutiniškai 15 papildomų pacientų per mėnesį.
+
+Ar galiu paklausti — maždaug kiek užklausų per savaitę gaunate, tokių kur pacientas nori užsiregistruoti?
+
+<span class="them">KLINIKA:</span> <span class="pause">[Klausaisi, užsirašai skaičių]</span>
+
+<span class="you">TU:</span> Suprantu. Tai jei net pusė iš tų būtų apdoroti automatiškai — tai jau <span class="var">[X]</span> papildomų pacientų per mėnesį. Ir tai kainuoja mažiau nei pusė registratorės algos.
+
+Siūlau taip — padarykime trumpą 15 minučių video skambutį, kur parodysiu demo būtent su <span class="var">[klinikos pavadinimas]</span> paslaugomis ir kainomis. Jūs matysite tiksliai kaip pacientas matytų jūsų svetainėje.
+
+Ar tiktų šis <span class="var">[ketvirtadienis 10:00]</span> ar geriau <span class="var">[penktadienis 14:00]</span>?
+            </div>
+        </div>
+
+        <h4>Odontologijos specifiniai skausmo taškai (naudok pokalbyje):</h4>
+        <ul>
+            <li>"Vidutinis paciento vertė odontologijoje — 350-500€. Prarastas pacientas = prarastas šimtas."</li>
+            <li>"Neatvykimai jūsų klinikai kainuoja tuščius laikus. AI siunčia priminimus ir sumažina neatvykimus 40%."</li>
+            <li>"Pacientai, kurie skambina dėl skausmaus danties 22 val. — jie nori registracijos DABAR, ne rytoj 9:00."</li>
+        </ul>
+    </div>
+
+    <!-- S6: BEAUTY -->
+    <div class="section" id="s6">
+        <span class="section-num">6</span>
+        <h2>Nišinis skriptas — Grožio salonai</h2>
+
+        <div class="rule-box"><strong>Tonas:</strong> Šiltas, draugiškas, energingas. Grožio salonų savininkės yra kūrybingi žmonės — kalbėk jų kalba. Žodžiai: registracijos, klientės, Instagram, laisvi laikai, papildomos paslaugos.</div>
+
+        <div class="script-block">
+            <div class="script-header">
+                <span class="label">Grožio salonų pilnas skriptas</span>
+                <span class="tag">3-4 min.</span>
+            </div>
+            <div class="script-body">
+<span class="you">TU:</span> Laba diena! Čia <span class="var">[Vardas]</span> iš Taktas. Ar galiu 30 sekundžių?
+
+<span class="them">SALONAS:</span> Taip, klausau.
+
+<span class="you">TU:</span> Žiūrėjau <span class="var">[salono pavadinimas]</span> Instagram — tikrai gražūs darbai, matosi kad profesionalės.
+
+Bet pastebėjau, kad klientės dažnai klausia apie kainas ir laikus komentaruose. Ir kai dirbate su kliente — fiziškai neįmanoma atsakyti iš karto. O klientė, kuri negauna atsakymo per 10 minučių — ji tiesiog rašo kitam salonui.
+
+Ar jums taip nutinka?
+
+<span class="them">SALONAS:</span> <span class="pause">[Dažniausiai: "Taip, nuolat..." arba "Aš viena viską darau..."]</span>
+
+<span class="you">TU:</span> Taip, tai labai dažna problema — ypač kai esi ir meistrė, ir administratorė vienu metu.
+
+Tai mes sukūrėme AI asistentą, kuris atsako jūsų klientėms automatiškai — su jūsų kainomis, laisvais laikais, ir net priima registracijas. Veikia ir svetainėje, ir Instagram, ir Facebook. 24/7, lietuviškai.
+
+Salonai, kurie tai naudoja, gauna vidutiniškai 20 papildomų registracijų per mėnesį — nes klientės gali registruotis net 11 val. vakaro.
+
+Ar galiu paklausti — kiek maždaug registracijų per savaitę gaunate per Instagram ar telefoną?
+
+<span class="them">SALONAS:</span> <span class="pause">[Klausaisi]</span>
+
+<span class="you">TU:</span> Tai jei AI perimtų tuos atsakymus ir registracijas — jūs galėtumėte fokusintis tik į darbą su klientėmis, o ne į telefoną.
+
+Padarykime taip — per 15 minučių video skambutį parodysiu kaip tai atrodytų su <span class="var">[salono pavadinimas]</span> paslaugomis ir kainomis. Visiškai be įsipareigojimų.
+
+Kada patogiau — <span class="var">[antradienis ryte]</span> ar <span class="var">[ketvirtadienis popiet]</span>?
+            </div>
+        </div>
+    </div>
+
+    <!-- S7: REAL ESTATE -->
+    <div class="section" id="s7">
+        <span class="section-num">7</span>
+        <h2>Nišinis skriptas — Nekilnojamasis turtas</h2>
+
+        <div class="rule-box"><strong>Tonas:</strong> Dalykiškas, greitas, orientuotas į rezultatus. NT agentai vertina laiką. Kalbėk apie kvalifikuotus klientus ir sutaupytą laiką. Žodžiai: pirkėjai, kvalifikavimas, objektai, sandoriai, komisiniai.</div>
+
+        <div class="script-block">
+            <div class="script-header">
+                <span class="label">NT agentūrų pilnas skriptas</span>
+                <span class="tag">3-4 min.</span>
+            </div>
+            <div class="script-body">
+<span class="you">TU:</span> Laba diena, čia <span class="var">[Vardas]</span> iš Taktas. Skambinu su vienu klausimu — ar galiu 30 sekundžių?
+
+<span class="them">AGENTAS:</span> Trumpai.
+
+<span class="you">TU:</span> Suprantu, trumpai. Dirbu su NT agentūromis ir matau vieną kartojančią situaciją — agentai gauna 50 užklausų dėl objektų, bet tik 10 iš jų yra rimti pirkėjai. Ir skiriate vienodai laiko visiems.
+
+Ar pas jus panašiai?
+
+<span class="them">AGENTAS:</span> <span class="pause">[Dažniausiai pritars]</span>
+
+<span class="you">TU:</span> Tai ką mes padarėme — AI asistentas, kuris automatiškai atsako į klausimus apie jūsų objektus 24/7, surenka pirkėjo biudžetą ir poreikius, ir perduoda jums TIK kvalifikuotus kontaktus su pilnu kontekstu.
+
+Jūs dirbate tik su rimtais pirkėjais. Vienas papildomas sandoris per mėnesį — tai kiek komisinių?
+
+<span class="them">AGENTAS:</span> <span class="pause">[Jie pagalvos apie skaičių]</span>
+
+<span class="you">TU:</span> Būtent. Tai jei per 15 minučių parodysiu demo su jūsų objektais — pamatysite ar tai tinka. Jokių įsipareigojimų.
+
+<span class="var">[Trečiadienis]</span> ar <span class="var">[penktadienis]</span> — kuris geriau?
+            </div>
+        </div>
+    </div>
+
+    <!-- S8: CONSTRUCTION -->
+    <div class="section" id="s8">
+        <span class="section-num">8</span>
+        <h2>Nišinis skriptas — Statybos ir renovacija</h2>
+
+        <div class="rule-box"><strong>Tonas:</strong> Tiesus, be vandens. Statybininkai ant objektų — neturi laiko. Max 2 minutės. Kalbėk kaip kolega, ne pardavėjas. <strong>PRANAŠUMAS: Paminėk MEBA — "pats turiu statybų įmonę".</strong></div>
+
+        <div class="script-block">
+            <div class="script-header">
+                <span class="label">Statybų pilnas skriptas</span>
+                <span class="tag">2-3 min. MAX</span>
+            </div>
+            <div class="script-body">
+<span class="you">TU:</span> Labas, čia <span class="var">[Vardas]</span>. Gali minutę?
+
+<span class="them">STATYBA:</span> Trumpai.
+
+<span class="you">TU:</span> Suprantu, neilgai. Pats turiu statybų įmonę, tai žinau kaip yra — klientai prašo sąmatų, bet kai esi ant objekto, nėra kada atsakyti. Ir klientas nuėina kitur.
+
+Ar tau irgi taip?
+
+<span class="them">STATYBA:</span> <span class="pause">[Beveik visada "taip"]</span>
+
+<span class="you">TU:</span> Tai padariau sprendimą — AI asistentas, kuris automatiškai atsako klientams, surenka projekto detales, sugeneruoja preliminarią sąmatą ir perduoda tau paruoštą užklausą. Tu tik paskambini jau paruoštam klientui.
+
+Vienas papildomas projektas per mėnesį — kiek tai būtų eurų?
+
+<span class="them">STATYBA:</span> <span class="pause">[Pagalvos]</span>
+
+<span class="you">TU:</span> Na taip. Per 15 min. galiu parodyti kaip tai veikia. Kada patogu — ryte ar po pietų?
+            </div>
+        </div>
+
+        <div class="tip-box"><strong>Statybų skambutis = trumpiausias.</strong> Max 2-3 minutės. Jei jie susidomėję — patys prailgins pokalbį. Bet niekada nebandyk užlaikyti.</div>
+    </div>
+
+    <!-- S9: LAW -->
+    <div class="section" id="s9">
+        <span class="section-num">9</span>
+        <h2>Nišinis skriptas — Teisė ir finansai</h2>
+
+        <div class="rule-box"><strong>Tonas:</strong> Formalus, profesionalus, pagarbus. Niekada nesakyk "tu" — tik "Jūs". Žodžiai: konsultacijos, bylos, klientai, konfidencialumas, efektyvumas.</div>
+
+        <div class="script-block">
+            <div class="script-header">
+                <span class="label">Teisės sektoriaus pilnas skriptas</span>
+                <span class="tag">3-4 min.</span>
+            </div>
+            <div class="script-body">
+<span class="you">TU:</span> Laba diena, čia <span class="var">[Vardas]</span> iš Taktas. Ar galėčiau 30 sekundžių Jūsų laiko?
+
+<span class="them">ADVOKATAS:</span> Prašom.
+
+<span class="you">TU:</span> Ačiū. Dirbu su teisinėmis kontororomis ir pastebiu vieną pasikartojantį dalyką — pirminės konsultacijos užima 30-60 minučių advokato laiko, bet tik apie pusė tų žmonių tampa klientais. Kita pusė tik "pasiteiravoja".
+
+Ar Jūsų kontoroje panašiai?
+
+<span class="them">ADVOKATAS:</span> <span class="pause">[Klausaisi]</span>
+
+<span class="you">TU:</span> Suprantu. Tai ką mes sukūrėme — AI asistentą, kuris prieš pirmą susitikimą automatiškai surenka kliento situacijos aprašymą, klasifikuoja užklausos sritį — šeimos, verslo, NT teisė — ir rezervuoja konsultacijos laiką kalendoriuje.
+
+Rezultatas — advokatas gauna paruoštą bylą, o ne tuščią pirmą susitikimą. Ir galima fokusintis tik į tuos, kurie tikrai taps klientais.
+
+Ar galėčiau per 15 minučių parodyti kaip tai atrodytų <span class="var">[kontoros pavadinimas]</span> atveju?
+
+Kada būtų patogiausia — <span class="var">[antradienis]</span> ar <span class="var">[ketvirtadienis]</span>?
+            </div>
+        </div>
+    </div>
+
+    <!-- S10: OBJECTION HANDLING -->
+    <div class="section" id="s10">
+        <span class="section-num">10</span>
+        <h2>Prieštaravimų valdymas — 15 dažniausių</h2>
+
+        <p>Kiekvienas prieštaravimas = galimybė. Formulė: <strong>Sutik → Perklausk → Pateik vertę → Grįžk prie CTA</strong></p>
+
+        <div class="objection">
+            <div class="objection-q">"Neturiu laiko"</div>
+            <div class="objection-a"><strong>Atsakymas:</strong> "Suprantu, būtent todėl ir skambinu — jūs neturite laiko atsakinėti klientams, ir dėl to juos prarandate. Padarykime taip — 15 minučių demo, ir pamatysite ar tai sutaupytų jums valandas kas savaitę. Ar tiktų ketvirtadienis?"</div>
+        </div>
+
+        <div class="objection">
+            <div class="objection-q">"Siųskite informaciją emailu"</div>
+            <div class="objection-a"><strong>Atsakymas:</strong> "Žinoma, nusiųsiu. Bet informacija neatskleis vieno dalyko — kaip AI asistentas atrodys būtent su jūsų paslaugomis. Tai galiu parodyti tik per demo. Gal 15 min. šią savaitę — ir po to nusiųsiu visą informaciją raštu?"</div>
+        </div>
+
+        <div class="objection">
+            <div class="objection-q">"Per brangu"</div>
+            <div class="objection-a"><strong>Atsakymas:</strong> "Suprantu — kaina svarbu. Bet leiskite paklausti: kiek kainuoja vienas prarastas klientas? Jei tai 300-500€, o Taktas kainuoja 199€/mėn. ir pritraukia 10+ papildomų klientų — tai investicija atsiperka per pirmą savaitę. Ar galiu tai parodyti skaičiais per demo?"</div>
+        </div>
+
+        <div class="objection">
+            <div class="objection-q">"Turime administratorę"</div>
+            <div class="objection-a"><strong>Atsakymas:</strong> "Puiku! Tai nereiškia, kad reikia ją keisti. AI asistentas dirba tada, kai ji nedirba — vakarais, savaitgaliais, šventėmis. Tai kaip antra pamaina, kuri kainuoja 10x mažiau. Ar norėtumėte pamatyti kaip jos darbas ir AI gali papildyti vienas kitą?"</div>
+        </div>
+
+        <div class="objection">
+            <div class="objection-q">"Man reikia pagalvoti"</div>
+            <div class="objection-a"><strong>Atsakymas:</strong> "Visiškai suprantu. O kas konkrečiai kelia klausimų — kaina, technologija, ar kažkas kita? Gal galiu atsakyti dabar ir sutaupyti laiko?"</div>
+        </div>
+
+        <div class="objection">
+            <div class="objection-q">"Nežinau ar mūsų klientams tai patiks"</div>
+            <div class="objection-a"><strong>Atsakymas:</strong> "Geras klausimas! Tyrimai rodo, kad 73% klientų teigiamai vertina greitą atsakymą — jiems svarbiau gauti atsakymą per 3 sekundes, nei tai, kas atsako. Bet geriausias būdas patikrinti — demo su jūsų klientų klausimais. Kada patogu?"</div>
+        </div>
+
+        <div class="objection">
+            <div class="objection-q">"Jau turime chatbotą"</div>
+            <div class="objection-a"><strong>Atsakymas:</strong> "O, puiku! Ar jis kalba lietuviškai natūraliai? Ar registruoja klientus tiesiogiai į kalendorių? Ar veikia ir Facebook žinutėse? Jei bent vienas 'ne' — gal vertėtų palyginti. 15 min. — ir pamatysite skirtumą."</div>
+        </div>
+
+        <div class="objection">
+            <div class="objection-q">"Mums nereikia AI"</div>
+            <div class="objection-a"><strong>Atsakymas:</strong> "Suprantu — AI skamba futuristiškai. Bet iš esmės tai tiesiog asistentas, kuris atsako jūsų klientams kai jūs negalite. Kaip sekretorė, kuri dirba naktimis ir nekainuoja 1,500€/mėn. Ar norėtumėte pamatyti kaip tai veikia praktikoje?"</div>
+        </div>
+
+        <div class="objection">
+            <div class="objection-q">"Perskambinkite vėliau / kitą savaitę"</div>
+            <div class="objection-a"><strong>Atsakymas:</strong> "Žinoma! Kada būtų geriausia — antradienį rytą ar ketvirtadienį popiet? Užsirašysiu ir paskambinsiu tiksliai tuo laiku." <em>(Visada gauk konkretų laiką, ne "vėliau")</em></div>
+        </div>
+
+        <div class="objection">
+            <div class="objection-q">"Mūsų verslas per mažas"</div>
+            <div class="objection-a"><strong>Atsakymas:</strong> "Tiesą sakant, mažos įmonės gauna didžiausią naudą — nes jūs esate vieni ir neturite kas atsako už jus. Tai būtent tokioms įmonėms ir sukurta. Startas planas — 199€/mėn., ir jūs turite AI asistentą kuris dirba 24/7."</div>
+        </div>
+
+        <div class="objection">
+            <div class="objection-q">"Atsiųskite kainoraštį"</div>
+            <div class="objection-a"><strong>Atsakymas:</strong> "Kainų informaciją rasite mūsų svetainėje taktas.lt — nuo 199€/mėn. Bet kaina be konteksto nieko nepasako. Per demo pamatysite kokią vertę gausite ir tada kaina atrodys kitaip. 15 minučių — ar verta?"</div>
+        </div>
+
+        <div class="objection">
+            <div class="objection-q">"Aš ne sprendimų priėmėjas"</div>
+            <div class="objection-a"><strong>Atsakymas:</strong> "Suprantu! Kas jūsų įmonėje priima sprendimus dėl klientų aptarnavimo ar technologijų? Gal galėtumėte perduoti kontaktą arba sujungti mus?"</div>
+        </div>
+
+        <div class="objection">
+            <div class="objection-q">"Klientai nori kalbėti su žmogumi"</div>
+            <div class="objection-a"><strong>Atsakymas:</strong> "Sutinku 100%. Bet kas geriau — klientas gauna AI atsakymą per 3 sekundes ir yra sujungiamas su jumis kai reikia, ar klientas skambina, niekas neatsako, ir jis nuėina kitur? AI ne pakeičia žmogų — jis pasitinka klientą kol žmogus nėra."</div>
+        </div>
+
+        <div class="objection">
+            <div class="objection-q">"Esu patenkintas dabartine situacija"</div>
+            <div class="objection-a"><strong>Atsakymas:</strong> "Džiugu girdėti! Tik vienas klausimas — ar žinote kiek klientų užklausų per mėnesį lieka neatsakytos po darbo valandų? Dauguma mūsų klientų nežinojo kol nepatikrino. Demo kaip tik tai parodo."</div>
+        </div>
+
+        <div class="objection">
+            <div class="objection-q">"Man nepatinka robotai"</div>
+            <div class="objection-a"><strong>Atsakymas:</strong> "Aš irgi nemėgstu tų senovinių robotų, kurie sako 'spauskite 1, spauskite 2'. Tai visiškai kitas dalykas — tai AI, kuris kalbasi natūraliai, lietuviškai, ir žino jūsų verslą. Pamatysite per demo — daugelis nustemba koks natūralus pokalbis."</div>
+        </div>
+    </div>
+
+    <!-- S11: DAILY SCHEDULE -->
+    <div class="section" id="s11">
+        <span class="section-num">11</span>
+        <h2>Idealios dienos struktūra</h2>
+
+        <div class="warning-box"><strong>Geriausi skambučių laikai Lietuvoje:</strong> Antradienis-ketvirtadienis, 9:30-11:30 ir 14:00-16:00. Neskambink pirmadienio rytą (žmonės planuoja savaitę) ir penktadienio popietę (jau galvoja apie savaitgalį).</div>
+
+        <div class="schedule">
+            <div class="time-slot">9:00</div>
+            <div class="activity"><strong>Pasiruošimas (30 min.)</strong> — Peržiūrėk šiandienos kontaktų sąrašą. Kiekvienam: 1 min. pažiūrėti svetainę/Instagram. Užsirašyk personalizacijos tašką.</div>
+            <div class="time-slot">9:30</div>
+            <div class="activity"><strong>Skambučių blokas #1 (90 min.)</strong> — 25 skambučiai be pertraukos. Stovėk. Šypsokis. Negalvok — tiesiog skambink. Po kiekvieno skambučio — 15 sek. užsirašyti rezultatą.</div>
+            <div class="time-slot">11:00</div>
+            <div class="activity"><strong>Pertrauka (30 min.)</strong> — Kavos pertrauka. Peržiūrėk rezultatus: kiek atsiliepė, kiek demo suplanuota. Paruošk emailus tiems, kas pasakė "siųskite info".</div>
+            <div class="time-slot">11:30</div>
+            <div class="activity"><strong>Follow-up skambučiai (60 min.)</strong> — Perskambink tiems, kas vakar sakė "perskambinkite". Perskambink tiems, kas neatsiliepė prieš 2 dienas.</div>
+            <div class="time-slot">12:30</div>
+            <div class="activity"><strong>Pietūs (60 min.)</strong></div>
+            <div class="time-slot">13:30</div>
+            <div class="activity"><strong>Admin darbai (30 min.)</strong> — Atnaujink CRM/spreadsheet. Siųsk follow-up emailus. Paruošk rytdienos sąrašą.</div>
+            <div class="time-slot">14:00</div>
+            <div class="activity"><strong>Skambučių blokas #2 (90 min.)</strong> — Dar 20-25 skambučiai. Popietė dažnai geriau — žmonės po pietų atsipalaidavę.</div>
+            <div class="time-slot">15:30</div>
+            <div class="activity"><strong>Demo skambučiai (60-90 min.)</strong> — Atlik suplanuotus demo pristatymus. Tai tavo aukso laikas — čia vyksta pardavimai.</div>
+            <div class="time-slot">17:00</div>
+            <div class="activity"><strong>Dienos apžvalga (15 min.)</strong> — Kiek skambučių? Kiek pokalbių? Kiek demo? Kas veikė, kas ne? Užsirašyk rytdienai.</div>
+        </div>
+
+        <div class="metrics">
+            <div class="metric"><div class="num">45-50</div><div class="lbl">Skambučiai/dieną</div></div>
+            <div class="metric"><div class="num">8-12</div><div class="lbl">Pokalbiai/dieną</div></div>
+            <div class="metric"><div class="num">1-3</div><div class="lbl">Demo/dieną</div></div>
+            <div class="metric"><div class="num">3<em>h</em></div><div class="lbl">Aktyvus skambinimo laikas</div></div>
+        </div>
+    </div>
+
+    <!-- S12: 8-WEEK STRATEGY -->
+    <div class="section" id="s12">
+        <span class="section-num">12</span>
+        <h2>8 savaičių skambučių strategija</h2>
+
+        <div class="week">
+            <div class="week-header">
+                <span class="week-title">Savaitė 1 — Treniruotė ir pirmi skambučiai</span>
+                <span class="week-target">50 skambučių, 0 pardavimų</span>
+            </div>
+            <ul>
+                <li><strong>Pirmadienis:</strong> Išmok skriptą mintinai. Pakartok 10 kartų garsiai stovėdamas. Įrašyk save ir perklausyk.</li>
+                <li><strong>Antradienis:</strong> Pirmi 10 skambučių — TAVO DRAUGAMS ir pažįstamiems verslininkams. Prašyk atgalinio ryšio: "Kaip skambėjo? Ar būtum klausęs?"</li>
+                <li><strong>Trečiadienis-ketvirtadienis:</strong> Pirmi 20 tikrų cold call'ų — odontologijos klinikos (lengviausia niša pradžiai).</li>
+                <li><strong>Penktadienis:</strong> Peržiūrėk kas veikė. Kur žmonės padėjo ragelį? Kur sakė "įdomu"? Koreguok skriptą.</li>
+            </ul>
+        </div>
+
+        <div class="week">
+            <div class="week-header">
+                <span class="week-title">Savaitė 2 — Odontologija intensyviai</span>
+                <span class="week-target">150 skambučių, 3-5 demo</span>
+            </div>
+            <ul>
+                <li><strong>Kasdien:</strong> 30-40 skambučių odontologijos klinikoms. Naudok pilną sąrašą.</li>
+                <li><strong>Stebėk:</strong> Kuris atidarymo sakinys veikia geriausiai? Kuris kvalifikavimo klausimas atveria pokalbį?</li>
+                <li><strong>Follow-up:</strong> Siųsk email po kiekvieno pozityvaus skambučio per 1 valandą.</li>
+                <li><strong>Tikėtina:</strong> 3-5 demo suplanuoti, 1-2 demo atlikti.</li>
+            </ul>
+        </div>
+
+        <div class="week">
+            <div class="week-header">
+                <span class="week-title">Savaitė 3 — Grožio salonai + odontologijos follow-up</span>
+                <span class="week-target">200 skambučių, 5-8 demo</span>
+            </div>
+            <ul>
+                <li><strong>Ryto blokas:</strong> Nauji skambučiai grožio salonams (nauja niša).</li>
+                <li><strong>Popietės blokas:</strong> Follow-up odontologijos kontaktams, kurie neatsakė arba sakė "vėliau".</li>
+                <li><strong>Demo:</strong> Atlik suplanuotus demo. Pirmas klientas labai arti.</li>
+                <li><strong>Tikėtina:</strong> PIRMAS MOKANTIS KLIENTAS šią savaitę.</li>
+            </ul>
+        </div>
+
+        <div class="week">
+            <div class="week-header">
+                <span class="week-title">Savaitė 4 — NT + Statybos + uždarinėjimas</span>
+                <span class="week-target">200 skambučių, 2-3 klientai</span>
+            </div>
+            <ul>
+                <li><strong>Naujos nišos:</strong> NT agentūros ir statybų įmonės. Statyboms naudok MEBA pranašumą.</li>
+                <li><strong>Uždaryk:</strong> Follow-up visiems, kas turėjo demo bet dar neatsakė. Skambink, nesiųsk email.</li>
+                <li><strong>Tikėtina:</strong> 2-3 mokantys klientai. Pirmas realus MRR.</li>
+            </ul>
+        </div>
+
+        <div class="week">
+            <div class="week-header">
+                <span class="week-title">Savaitė 5 — Teisė + visų nišų follow-up</span>
+                <span class="week-target">200 skambučių, 3-5 klientai</span>
+            </div>
+            <ul>
+                <li><strong>Nauja niša:</strong> Teisės ir finansų sektorius. Formalus tonas!</li>
+                <li><strong>Agresyvus follow-up:</strong> Visi kontaktai, kurie sakė "pagalvosiu" — skambink dabar. 2-3 sav. jau pagalvojo.</li>
+                <li><strong>Tikėtina:</strong> 3-5 klientai. MRR ~1,000-2,000€.</li>
+            </ul>
+        </div>
+
+        <div class="week">
+            <div class="week-header">
+                <span class="week-title">Savaitė 6 — Naujų kontaktų paieška + skalė</span>
+                <span class="week-target">+50 naujų kontaktų</span>
+            </div>
+            <ul>
+                <li>Surask 50 naujų kontaktų geriausiose nišose (ten kur buvo daugiausiai konversijų).</li>
+                <li>Pradėk seksą su naujais kontaktais: email pirma diena, skambutis antra diena.</li>
+                <li>Paprašyk esamų klientų referralų: "Ar pažįstate kolegą, kuriam tai irgi būtų naudinga?"</li>
+            </ul>
+        </div>
+
+        <div class="week">
+            <div class="week-header">
+                <span class="week-title">Savaitė 7 — Optimizavimas</span>
+                <span class="week-target">Tobulinti konversiją</span>
+            </div>
+            <ul>
+                <li>Analizuok skaičius: kuris skriptas konvertuoja geriausiai? Kuri niša?</li>
+                <li>A/B testuok atidarymą: bandyk 2 skirtingas versijas ir palygink.</li>
+                <li>Sukurk case study iš pirmo kliento — tai 10x pagerin demo konversiją.</li>
+                <li>Tikėtina: 5-7 klientai, aiškus procesas.</li>
+            </ul>
+        </div>
+
+        <div class="week">
+            <div class="week-header">
+                <span class="week-title">Savaitė 8 — Mašina veikia</span>
+                <span class="week-target">Sistemizuoti ir kartoti</span>
+            </div>
+            <ul>
+                <li>Procesas aiškus: X skambučių/dieną → Y demo → Z klientų.</li>
+                <li>Svarstyk: ar samdyti pardavėją (komisiniu)? Ar investuoti į reklamą?</li>
+                <li>Referral programa esamiems klientams.</li>
+                <li>Tikėtina: 7-10 klientų = 2,000-4,000€/mėn. MRR + setup fees.</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- S13: KPIs -->
+    <div class="section" id="s13">
+        <span class="section-num">13</span>
+        <h2>KPI, metrikos ir tikslai</h2>
+
+        <table>
+            <thead>
+                <tr><th>Metrika</th><th>Tikslas</th><th>Geras</th><th>Blogas</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>Skambučiai/dieną</td><td>40-50</td><td>50+ = grindėjas</td><td>&lt;20 = per lėtai</td></tr>
+                <tr><td>Atsiliepimo rodiklis</td><td>30-40%</td><td>40%+ = geras laikas</td><td>&lt;20% = keisk valandą</td></tr>
+                <tr><td>Pokalbis > 1 min.</td><td>20-30%</td><td>30%+ = geras skriptas</td><td>&lt;15% = keisk atidarymą</td></tr>
+                <tr><td>Demo suplanuota</td><td>2-3/dieną</td><td>3+ = mašina</td><td>&lt;1 = tobulint skriptą</td></tr>
+                <tr><td>Demo → klientas</td><td>30%+</td><td>40%+ = puikus demo</td><td>&lt;20% = tobulint demo</td></tr>
+                <tr><td>Skambučiai → 1 klientas</td><td>~100-150</td><td>&lt;100 = efektyvus</td><td>&gt;200 = kažkas ne taip</td></tr>
+            </tbody>
+        </table>
+
+        <h3>Mėnesiniai tikslai:</h3>
+        <table>
+            <thead>
+                <tr><th>Mėnuo</th><th>Skambučiai</th><th>Demo</th><th>Nauji klientai</th><th>MRR</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>Mėnuo 1</td><td>600-800</td><td>15-25</td><td>3-5</td><td>900-2,500€</td></tr>
+                <tr><td>Mėnuo 2</td><td>800-1,000</td><td>20-35</td><td>5-8</td><td>2,500-5,000€</td></tr>
+                <tr><td>Mėnuo 3</td><td>800 + referral</td><td>25-40</td><td>7-12</td><td>5,000-9,000€</td></tr>
+                <tr><td>Mėnuo 6</td><td>600 + referral + inbound</td><td>30-50</td><td>8-15</td><td>12,000-25,000€</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- S14: FOLLOW-UP -->
+    <div class="section" id="s14">
+        <span class="section-num">14</span>
+        <h2>Follow-up po skambučio</h2>
+
+        <h3>Per 1 valandą po pozityvaus pokalbio — siųsk email:</h3>
+        <div class="script-block">
+            <div class="script-header">
+                <span class="label">Follow-up email po skambučio</span>
+                <span class="tag">Siųsk per 1h</span>
+            </div>
+            <div class="script-body">
+Subject: Mūsų pokalbis — demo <span class="var">[data, laikas]</span>
+
+Sveiki <span class="var">[vardas]</span>,
+
+Ačiū už pokalbį! Kaip sutarėme — demo <span class="var">[ketvirtadienį 10:00]</span>.
+
+Per 15 min. parodysiu:
+— Kaip AI asistentas atrodytų su <span class="var">[įmonės]</span> paslaugomis
+— Kiek klientų galite papildomai pritraukti
+— Kaip viskas veikia praktikoje
+
+Video skambučio nuoroda: <span class="var">[Google Meet / Zoom link]</span>
+
+Iki pasimatymo!
+<span class="var">[Vardas]</span>
+Taktas.lt
+            </div>
+        </div>
+
+        <h3>Jei neatsiliepia — voicemail + email + skambutis kitą dieną:</h3>
+        <table>
+            <thead><tr><th>Diena</th><th>Veiksmas</th></tr></thead>
+            <tbody>
+                <tr><td>Diena 1</td><td>Skambutis → Neatsiliepia → Voicemail (žr. skriptą žemiau) + Email</td></tr>
+                <tr><td>Diena 2</td><td>Skambutis pakartotinis (kitu laiku — jei ryte, dabar popiet)</td></tr>
+                <tr><td>Diena 4</td><td>Email follow-up su vertės pasiūlymu</td></tr>
+                <tr><td>Diena 7</td><td>Paskutinis skambutis</td></tr>
+                <tr><td>Diena 14</td><td>Paskutinis email (break-up)</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- S15: VOICEMAIL -->
+    <div class="section" id="s15">
+        <span class="section-num">15</span>
+        <h2>Voicemail skriptai</h2>
+
+        <div class="rule-box"><strong>Voicemail taisyklės:</strong> Max 20 sekundžių. Tavo vardas + kodėl skambini + vienas konkretus skaičius + "perskambinsiu rytoj". NIEKADA neprašyk perskambinti — jie neperskambins.</div>
+
+        <div class="script-block">
+            <div class="script-header">
+                <span class="label">Voicemail #1 — Pirmas skambutis</span>
+                <span class="tag">Max 20 sek.</span>
+            </div>
+            <div class="script-body">
+<span class="you">TU:</span> Laba diena, čia <span class="var">[Vardas]</span> iš Taktas. Skambinu dėl vieno dalyko — pastebėjau, kad <span class="var">[įmonės pavadinimas]</span> neturi automatinio klientų aptarnavimo po darbo valandų, o panašios įmonės dėl to praranda vidutiniškai 15-20 klientų per mėnesį. Perskambinsiu rytoj — arba galite rasti info taktas.lt. Ačiū!
+            </div>
+        </div>
+
+        <div class="script-block">
+            <div class="script-header">
+                <span class="label">Voicemail #2 — Antras skambutis</span>
+                <span class="tag">Max 15 sek.</span>
+            </div>
+            <div class="script-body">
+<span class="you">TU:</span> Sveiki, čia <span class="var">[Vardas]</span> iš Taktas — skambinau vakar. Tik norėjau pasidalinti, kad <span class="var">[srities]</span> įmonės, naudodamos mūsų AI asistentą, pritraukia vidutiniškai <span class="var">[+15]</span> papildomų klientų per mėnesį. Jei įdomu — taktas.lt arba aš dar pabandysiu sugauti jus šią savaitę.
+            </div>
+        </div>
+
+        <div class="tip-box">
+            <strong>Pro tip:</strong> Voicemail + email kombinacija veikia 3x geriau nei bet kuris vienas. Palik voicemail, ir per 5 minutes siųsk email: "Sveiki, ką tik bandžiau paskambinti dėl..."
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>Taktas Cold Calling Playbook v1.0 &mdash; 2026-03-18 &mdash; Konfidencialu</p>
+    </div>
+</div>
+</body>
+</html>
