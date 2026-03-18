@@ -1,0 +1,1114 @@
+<!DOCTYPE html>
+<html lang="lt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Taktas — AI asistentas, kuris uždirba jums pinigus kol miegate</title>
+    <meta name="description" content="Taktas — AI asistentas Lietuvos verslui. Atsako klientams per 3 sekundes, 24/7, lietuviškai. Nuo 199€/mėn.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --primary: #4F46E5;
+            --primary-light: #818CF8;
+            --primary-dark: #3730A3;
+            --bg: #05080F;
+            --bg-card: #0D1117;
+            --bg-card-hover: #161B26;
+            --text: #E2E8F0;
+            --text-muted: #94A3B8;
+            --accent: #00E59B;
+            --accent-glow: rgba(0, 229, 155, 0.12);
+            --accent-strong: rgba(0, 229, 155, 0.25);
+            --red: #FF4444;
+            --gold: #FFD700;
+            --border: rgba(255, 255, 255, 0.06);
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* NAVBAR */
+        nav {
+            position: fixed; top: 0; width: 100%; z-index: 100;
+            padding: 0.75rem 2rem;
+            backdrop-filter: blur(24px);
+            background: rgba(5, 8, 15, 0.9);
+            border-bottom: 1px solid var(--border);
+        }
+        .nav-inner {
+            max-width: 1200px; margin: 0 auto;
+            display: flex; align-items: center; justify-content: space-between;
+        }
+        .logo {
+            font-size: 1.6rem; font-weight: 900; color: #fff;
+            letter-spacing: -1px; text-transform: uppercase;
+        }
+        .logo span { color: var(--accent); }
+        .nav-right { display: flex; align-items: center; gap: 1.5rem; }
+        .nav-link {
+            color: var(--text-muted); text-decoration: none; font-size: 0.85rem;
+            font-weight: 500; transition: color 0.2s;
+        }
+        .nav-link:hover { color: #fff; }
+        .nav-cta {
+            padding: 0.55rem 1.5rem; background: var(--accent); color: #05080F;
+            border: none; border-radius: 8px; font-size: 0.85rem; font-weight: 800;
+            cursor: pointer; transition: all 0.2s; text-decoration: none;
+            text-transform: uppercase; letter-spacing: 0.5px;
+        }
+        .nav-cta:hover { transform: translateY(-1px); box-shadow: 0 4px 20px rgba(0, 229, 155, 0.35); }
+
+        /* HERO — THE MONEY SHOT */
+        .hero {
+            min-height: 100vh; display: flex; align-items: center; justify-content: center;
+            text-align: center; padding: 7rem 2rem 3rem; position: relative; overflow: hidden;
+        }
+        .hero::before {
+            content: ''; position: absolute; top: -40%; left: 50%; transform: translateX(-50%);
+            width: 1000px; height: 1000px;
+            background: radial-gradient(circle, rgba(0, 229, 155, 0.07) 0%, rgba(79, 70, 229, 0.05) 40%, transparent 70%);
+            pointer-events: none;
+        }
+        .hero-content { max-width: 900px; position: relative; z-index: 1; }
+
+        /* Scrolling ticker */
+        .ticker-wrap {
+            width: 100%; overflow: hidden; margin-bottom: 2.5rem;
+            padding: 0.6rem 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+        }
+        .ticker {
+            display: flex; gap: 3rem; animation: ticker 25s linear infinite; white-space: nowrap;
+        }
+        .ticker-item {
+            font-size: 0.8rem; font-weight: 700; text-transform: uppercase;
+            letter-spacing: 1.5px; color: var(--text-muted); flex-shrink: 0;
+        }
+        .ticker-item .num { color: var(--accent); }
+        @keyframes ticker { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+        .hero-eyebrow {
+            display: inline-flex; align-items: center; gap: 0.5rem;
+            padding: 0.35rem 0.9rem; background: rgba(255, 68, 68, 0.1);
+            border: 1px solid rgba(255, 68, 68, 0.2); border-radius: 100px;
+            font-size: 0.8rem; font-weight: 700; color: var(--red); margin-bottom: 1.5rem;
+            text-transform: uppercase; letter-spacing: 1px;
+        }
+        .hero-eyebrow .dot {
+            width: 6px; height: 6px; background: var(--red);
+            border-radius: 50%; animation: blink 1.2s infinite;
+        }
+        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.2; } }
+
+        /* The headline that sells in 1 second */
+        .hero-headline {
+            font-size: clamp(2.5rem, 6vw, 4.2rem); font-weight: 900;
+            line-height: 1.05; letter-spacing: -2px; margin-bottom: 1.25rem;
+        }
+        .hero-headline .money {
+            background: linear-gradient(135deg, var(--gold), #FFA500);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+        }
+        .hero-headline .ai {
+            background: linear-gradient(135deg, var(--accent), var(--primary-light));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+        }
+
+        .hero-sub {
+            font-size: 1.2rem; color: var(--text-muted); max-width: 620px;
+            margin: 0 auto 2rem; line-height: 1.7;
+        }
+        .hero-sub strong { color: #fff; font-weight: 700; }
+
+        /* LIVE counter */
+        .live-bar {
+            display: inline-flex; align-items: center; gap: 0.75rem;
+            padding: 0.5rem 1.25rem; background: var(--bg-card); border: 1px solid var(--border);
+            border-radius: 100px; margin-bottom: 2rem; font-size: 0.85rem;
+        }
+        .live-dot {
+            width: 8px; height: 8px; background: var(--accent); border-radius: 50%;
+            box-shadow: 0 0 8px var(--accent); animation: blink 2s infinite;
+        }
+        .live-bar .count { color: var(--accent); font-weight: 800; }
+
+        /* CTA Form */
+        .hero-form {
+            display: flex; gap: 0.6rem; max-width: 520px; margin: 0 auto;
+            flex-wrap: wrap; justify-content: center;
+        }
+        .hero-form input[type="email"],
+        .hero-form input[type="tel"] {
+            flex: 1; min-width: 180px; padding: 0.85rem 1.2rem;
+            background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px;
+            color: #fff; font-size: 0.95rem; font-family: inherit; outline: none;
+            transition: border-color 0.2s;
+        }
+        .hero-form select {
+            width: 100%; padding: 0.85rem 1.2rem;
+            background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px;
+            color: #fff; font-size: 0.95rem; font-family: inherit; outline: none;
+            transition: border-color 0.2s; appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath fill='%2394A3B8' d='M1.41 0L6 4.58 10.59 0 12 1.41l-6 6-6-6z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat; background-position: right 1.2rem center;
+        }
+        .hero-form select option { background: var(--bg-card); color: #fff; }
+        .hero-form input::placeholder { color: var(--text-muted); }
+        .hero-form input:focus, .hero-form select:focus { border-color: var(--accent); }
+        .hero-form button {
+            padding: 0.95rem 2rem; background: var(--accent); color: #05080F;
+            border: none; border-radius: 10px; font-size: 1.05rem; font-weight: 800;
+            cursor: pointer; transition: all 0.3s; font-family: inherit;
+            width: 100%; text-transform: uppercase; letter-spacing: 0.5px;
+        }
+        .hero-form button:hover {
+            transform: translateY(-2px); box-shadow: 0 8px 30px rgba(0, 229, 155, 0.35);
+        }
+        .form-note {
+            width: 100%; text-align: center; font-size: 0.75rem;
+            color: var(--text-muted); margin-top: 0.25rem;
+        }
+        .success-message {
+            display: none; padding: 1.25rem 1.5rem; background: var(--accent-glow);
+            border: 1px solid rgba(0, 229, 155, 0.3); border-radius: 12px;
+            color: var(--accent); font-weight: 700; text-align: center;
+            max-width: 520px; margin: 0 auto; font-size: 1.05rem;
+        }
+        .success-message.show { display: block; animation: fadeIn 0.4s ease; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* PROOF BAR */
+        .proof-strip {
+            display: flex; justify-content: center; gap: 2rem;
+            margin-top: 2.5rem; flex-wrap: wrap; padding-top: 2rem;
+        }
+        .proof-box {
+            text-align: center; padding: 1rem 1.5rem;
+            background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px;
+            min-width: 130px;
+        }
+        .proof-box .num {
+            font-size: 1.6rem; font-weight: 900; color: #fff;
+        }
+        .proof-box .num em {
+            font-style: normal; color: var(--accent);
+        }
+        .proof-box .lbl {
+            font-size: 0.72rem; color: var(--text-muted);
+            text-transform: uppercase; letter-spacing: 0.5px; margin-top: 0.15rem;
+        }
+
+        /* PROBLEM — MAKE THEM FEEL IT */
+        .problem { padding: 5rem 2rem; max-width: 900px; margin: 0 auto; }
+        .section-label {
+            text-transform: uppercase; font-size: 0.7rem; font-weight: 800;
+            letter-spacing: 3px; color: var(--primary-light); text-align: center;
+            margin-bottom: 0.6rem;
+        }
+        .section-title {
+            font-size: clamp(1.8rem, 4vw, 2.5rem); font-weight: 900;
+            text-align: center; letter-spacing: -1px; margin-bottom: 0.75rem;
+        }
+        .section-subtitle {
+            text-align: center; color: var(--text-muted); max-width: 600px;
+            margin: 0 auto 2.5rem; font-size: 1rem;
+        }
+        .problem-grid {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;
+        }
+        .problem-card {
+            padding: 1.5rem; background: rgba(255, 68, 68, 0.03);
+            border: 1px solid rgba(255, 68, 68, 0.08); border-radius: 14px;
+            transition: all 0.3s;
+        }
+        .problem-card:hover { border-color: rgba(255, 68, 68, 0.2); }
+        .problem-card .icon { font-size: 1.75rem; margin-bottom: 0.75rem; }
+        .problem-card h3 { font-size: 0.95rem; font-weight: 700; color: #fff; margin-bottom: 0.35rem; }
+        .problem-card p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.5; }
+        .problem-card .loss {
+            display: inline-block; margin-top: 0.5rem; padding: 0.2rem 0.6rem;
+            background: rgba(255, 68, 68, 0.1); border-radius: 6px;
+            font-size: 0.78rem; font-weight: 700; color: var(--red);
+        }
+
+        /* SOLUTION ARROW */
+        .solution-bridge {
+            text-align: center; padding: 3rem 2rem 1rem; font-size: 2rem; color: var(--accent);
+        }
+
+        /* NICHES */
+        .niches { padding: 2rem 2rem 5rem; max-width: 1200px; margin: 0 auto; }
+        .niches-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.25rem;
+        }
+        .niche-card {
+            background: var(--bg-card); border: 1px solid var(--border);
+            border-radius: 16px; padding: 1.75rem; transition: all 0.3s;
+            position: relative; overflow: hidden;
+        }
+        .niche-card:hover { background: var(--bg-card-hover); border-color: rgba(0, 229, 155, 0.2); transform: translateY(-4px); }
+        .niche-card .tag {
+            display: inline-block; padding: 0.2rem 0.55rem; background: var(--accent-glow);
+            border-radius: 5px; font-size: 0.65rem; font-weight: 800; color: var(--accent);
+            text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.75rem;
+        }
+        .niche-card h3 { font-size: 1.1rem; font-weight: 800; margin-bottom: 0.35rem; color: #fff; }
+        .niche-card .subtitle { font-size: 0.85rem; color: var(--primary-light); font-weight: 600; margin-bottom: 0.6rem; }
+        .niche-card p { color: var(--text-muted); font-size: 0.85rem; line-height: 1.55; }
+        .niche-card .result {
+            margin-top: 0.75rem; padding-top: 0.75rem; border-top: 1px solid var(--border);
+            font-size: 0.85rem; font-weight: 700;
+            background: linear-gradient(135deg, var(--accent), var(--gold));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+        }
+
+        /* WHAT THEY GET */
+        .features { padding: 5rem 2rem; max-width: 1100px; margin: 0 auto; }
+        .features-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1rem;
+        }
+        .feature-card {
+            background: var(--bg-card); border: 1px solid var(--border);
+            border-radius: 14px; padding: 1.5rem; transition: all 0.3s;
+        }
+        .feature-card:hover { background: var(--bg-card-hover); transform: translateY(-3px); }
+        .feature-icon {
+            width: 40px; height: 40px;
+            background: linear-gradient(135deg, rgba(0, 229, 155, 0.1), rgba(79, 70, 229, 0.1));
+            border-radius: 10px; display: flex; align-items: center; justify-content: center;
+            font-size: 1.2rem; margin-bottom: 0.75rem;
+        }
+        .feature-card h3 { font-size: 0.95rem; font-weight: 700; margin-bottom: 0.35rem; color: #fff; }
+        .feature-card p { color: var(--text-muted); font-size: 0.85rem; line-height: 1.5; }
+
+        /* ROI */
+        .roi { padding: 5rem 2rem; max-width: 650px; margin: 0 auto; }
+        .roi-box {
+            background: var(--bg-card); border: 1px solid var(--border);
+            border-radius: 20px; padding: 2rem;
+        }
+        .roi-row {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 0.6rem 0; border-bottom: 1px solid var(--border);
+        }
+        .roi-row:last-child { border-bottom: none; padding-top: 0.75rem; }
+        .roi-row .label { color: var(--text-muted); font-size: 0.9rem; }
+        .roi-row .value { font-weight: 800; color: #fff; font-size: 1rem; }
+        .roi-row .value.red { color: var(--red); }
+        .roi-row .value.green { color: var(--accent); font-size: 1.2rem; }
+
+        /* PRICING */
+        .pricing { padding: 5rem 2rem; max-width: 950px; margin: 0 auto; }
+        .pricing-cards {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.25rem;
+        }
+        .pricing-card {
+            background: var(--bg-card); border: 1px solid var(--border);
+            border-radius: 16px; padding: 2.25rem 1.75rem; text-align: center;
+            transition: all 0.3s; position: relative;
+        }
+        .pricing-card.hot {
+            border-color: var(--accent);
+            background: linear-gradient(180deg, rgba(0, 229, 155, 0.04), var(--bg-card));
+        }
+        .pricing-card.hot::before {
+            content: 'Populiariausias'; position: absolute; top: -11px; left: 50%;
+            transform: translateX(-50%); background: var(--accent); color: #05080F;
+            padding: 0.2rem 0.9rem; border-radius: 100px; font-size: 0.65rem;
+            font-weight: 900; text-transform: uppercase; letter-spacing: 1px;
+        }
+        .pricing-card h3 { font-size: 1.05rem; font-weight: 800; color: #fff; margin-bottom: 0.4rem; }
+        .pricing-card .desc { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 1.25rem; }
+        .price-tag { font-size: 2.75rem; font-weight: 900; color: #fff; line-height: 1; }
+        .price-tag span { font-size: 0.9rem; font-weight: 500; color: var(--text-muted); }
+        .price-sub { font-size: 0.75rem; color: var(--text-muted); margin-top: 0.2rem; margin-bottom: 1.25rem; }
+        .pricing-list { list-style: none; text-align: left; margin-bottom: 1.5rem; }
+        .pricing-list li {
+            padding: 0.35rem 0; font-size: 0.82rem; color: var(--text-muted);
+            display: flex; align-items: center; gap: 0.4rem;
+        }
+        .ck { color: var(--accent); font-weight: 800; min-width: 16px; font-size: 0.85rem; }
+        .pricing-btn {
+            width: 100%; padding: 0.75rem; border: 2px solid var(--border);
+            background: transparent; color: var(--text); border-radius: 10px;
+            font-size: 0.9rem; font-weight: 700; cursor: pointer; transition: all 0.2s;
+            font-family: inherit; text-transform: uppercase; letter-spacing: 0.5px;
+        }
+        .pricing-btn:hover { border-color: var(--accent); color: var(--accent); }
+        .pricing-card.hot .pricing-btn {
+            background: var(--accent); color: #05080F; border-color: var(--accent);
+        }
+        .pricing-card.hot .pricing-btn:hover {
+            box-shadow: 0 8px 25px rgba(0, 229, 155, 0.3); transform: translateY(-2px);
+        }
+
+        /* PROCESS */
+        .process { padding: 5rem 2rem; max-width: 900px; margin: 0 auto; }
+        .steps { display: flex; flex-direction: column; gap: 1.25rem; }
+        .step {
+            display: flex; gap: 1.25rem; align-items: flex-start;
+            padding: 1.25rem; background: var(--bg-card); border: 1px solid var(--border);
+            border-radius: 14px; transition: all 0.3s;
+        }
+        .step:hover { border-color: rgba(0, 229, 155, 0.15); }
+        .step-num {
+            min-width: 40px; height: 40px;
+            background: linear-gradient(135deg, var(--accent), #059669);
+            border-radius: 10px; display: flex; align-items: center; justify-content: center;
+            font-size: 1.1rem; font-weight: 900; color: #05080F;
+        }
+        .step h3 { font-size: 1rem; font-weight: 700; margin-bottom: 0.2rem; color: #fff; }
+        .step p { color: var(--text-muted); font-size: 0.85rem; }
+        .step .tag-time {
+            display: inline-block; margin-top: 0.4rem; padding: 0.12rem 0.45rem;
+            background: rgba(0, 229, 155, 0.08); border-radius: 4px;
+            font-size: 0.7rem; font-weight: 700; color: var(--accent); text-transform: uppercase;
+        }
+
+        /* FAQ */
+        .faq { padding: 5rem 2rem; max-width: 700px; margin: 0 auto; }
+        .faq-item { border-bottom: 1px solid var(--border); padding: 1.1rem 0; }
+        .faq-q {
+            font-weight: 700; color: #fff; font-size: 0.95rem; cursor: pointer;
+            display: flex; justify-content: space-between; align-items: center; gap: 1rem;
+        }
+        .faq-q::after { content: '+'; font-size: 1.2rem; color: var(--text-muted); min-width: 16px; text-align: center; }
+        .faq-item.open .faq-q::after { content: '-'; }
+        .faq-a {
+            max-height: 0; overflow: hidden; transition: max-height 0.3s ease;
+            color: var(--text-muted); font-size: 0.85rem; line-height: 1.6;
+        }
+        .faq-item.open .faq-a { max-height: 200px; padding-top: 0.6rem; }
+
+        /* FINAL CTA */
+        .final-cta { padding: 5rem 2rem; text-align: center; }
+        .final-box {
+            max-width: 700px; margin: 0 auto;
+            background: linear-gradient(135deg, rgba(0, 229, 155, 0.06), rgba(79, 70, 229, 0.06));
+            border: 1px solid rgba(0, 229, 155, 0.15); border-radius: 24px;
+            padding: 3rem 2rem; position: relative; overflow: hidden;
+        }
+        .final-box::before {
+            content: ''; position: absolute; top: -50%; left: 50%; transform: translateX(-50%);
+            width: 500px; height: 500px;
+            background: radial-gradient(circle, rgba(0, 229, 155, 0.08) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        .final-box h2 {
+            font-size: clamp(1.4rem, 3.5vw, 1.9rem); font-weight: 900;
+            letter-spacing: -0.5px; margin-bottom: 0.6rem; position: relative;
+        }
+        .final-box p {
+            color: var(--text-muted); margin-bottom: 1.75rem;
+            font-size: 0.95rem; position: relative;
+        }
+
+        /* Guarantee */
+        .guarantee { padding: 4rem 2rem; max-width: 700px; margin: 0 auto; text-align: center; }
+        .guarantee-box {
+            background: rgba(0, 229, 155, 0.04); border: 1px solid rgba(0, 229, 155, 0.15);
+            border-radius: 20px; padding: 2.5rem 2rem;
+        }
+        .guarantee-box .shield { font-size: 3rem; margin-bottom: 1rem; }
+        .guarantee-box h3 { font-size: 1.3rem; font-weight: 900; color: #fff; margin-bottom: 0.5rem; }
+        .guarantee-box p { color: var(--text-muted); font-size: 0.95rem; max-width: 500px; margin: 0 auto; line-height: 1.6; }
+        .guarantee-box .bold { color: var(--accent); font-weight: 700; }
+
+        /* Comparison table */
+        .compare { padding: 5rem 2rem; max-width: 750px; margin: 0 auto; }
+        .compare-table {
+            width: 100%; border-collapse: collapse; margin-top: 0.5rem;
+        }
+        .compare-table th, .compare-table td {
+            padding: 0.75rem 1rem; text-align: center; font-size: 0.88rem;
+            border-bottom: 1px solid var(--border);
+        }
+        .compare-table th {
+            font-weight: 800; color: #fff; font-size: 0.9rem;
+            text-transform: uppercase; letter-spacing: 0.5px;
+        }
+        .compare-table th:first-child, .compare-table td:first-child {
+            text-align: left; color: var(--text-muted); font-weight: 500;
+        }
+        .compare-table th:last-child { color: var(--accent); }
+        .compare-table td:last-child { color: var(--accent); font-weight: 700; }
+        .compare-table .yes { color: var(--accent); font-weight: 700; }
+        .compare-table .no { color: var(--red); font-weight: 700; }
+        @media (max-width: 640px) {
+            .compare-table th, .compare-table td { padding: 0.5rem 0.4rem; font-size: 0.78rem; }
+        }
+
+        /* Video placeholder */
+        .video-section { padding: 4rem 2rem; max-width: 800px; margin: 0 auto; text-align: center; }
+        .video-box {
+            position: relative; width: 100%; padding-top: 56.25%;
+            background: var(--bg-card); border: 1px solid var(--border);
+            border-radius: 16px; overflow: hidden; cursor: pointer;
+        }
+        .video-box .play-overlay {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            background: linear-gradient(135deg, rgba(0, 229, 155, 0.05), rgba(79, 70, 229, 0.05));
+        }
+        .play-btn {
+            width: 72px; height: 72px; background: var(--accent); border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            box-shadow: 0 0 40px rgba(0, 229, 155, 0.25); margin-bottom: 1rem;
+            transition: transform 0.3s;
+        }
+        .play-btn:hover { transform: scale(1.1); }
+        .play-btn svg { width: 28px; height: 28px; fill: #05080F; margin-left: 4px; }
+        .video-box .play-text { color: var(--text-muted); font-size: 0.9rem; font-weight: 600; }
+
+        /* Footer */
+        footer { padding: 2rem 2rem; border-top: 1px solid var(--border); }
+        .footer-inner {
+            max-width: 1200px; margin: 0 auto; display: flex;
+            justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;
+        }
+        .footer-logo { font-size: 1rem; font-weight: 900; color: #fff; text-transform: uppercase; letter-spacing: -0.5px; }
+        .footer-logo span { color: var(--accent); }
+        .footer-text { color: var(--text-muted); font-size: 0.75rem; }
+        .footer-links { display: flex; gap: 1.25rem; }
+        .footer-links a { color: var(--text-muted); text-decoration: none; font-size: 0.75rem; transition: color 0.2s; }
+        .footer-links a:hover { color: var(--accent); }
+
+        /* Grid bg */
+        .grid-bg {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background-image:
+                linear-gradient(rgba(255,255,255,0.012) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.012) 1px, transparent 1px);
+            background-size: 50px 50px; pointer-events: none; z-index: 0;
+        }
+
+        /* Mobile */
+        @media (max-width: 768px) {
+            .problem-grid { grid-template-columns: 1fr; }
+            .proof-strip { gap: 0.75rem; }
+            .proof-box { min-width: 100px; padding: 0.75rem 1rem; }
+        }
+        @media (max-width: 640px) {
+            .step { flex-direction: column; gap: 0.6rem; }
+            .footer-inner { flex-direction: column; text-align: center; }
+            .hero-form { flex-direction: column; align-items: stretch; }
+            .hero-form input[type="email"],
+            .hero-form input[type="tel"],
+            .hero-form select { min-width: unset; }
+            .roi-row { flex-direction: column; gap: 0.2rem; text-align: center; }
+            .nav-link { display: none; }
+            .ticker-wrap { display: none; }
+        }
+    </style>
+</head>
+<body>
+    <div class="grid-bg"></div>
+
+    <!-- NAV -->
+    <nav>
+        <div class="nav-inner">
+            <div class="logo">Tak<span>tas</span></div>
+            <div class="nav-right">
+                <a href="#kainos" class="nav-link">Kainos</a>
+                <a href="#sritys" class="nav-link">Sritys</a>
+                <a href="#demo" class="nav-cta">Gauti demo</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero">
+        <div class="hero-content">
+
+            <!-- Ticker -->
+            <div class="ticker-wrap">
+                <div class="ticker">
+                    <span class="ticker-item">Odontologija <span class="num">+7,500€/mėn.</span></span>
+                    <span class="ticker-item">Grožio salonai <span class="num">+3,000€/mėn.</span></span>
+                    <span class="ticker-item">Statybos <span class="num">+20,000€/mėn.</span></span>
+                    <span class="ticker-item">Nekilnojamasis turtas <span class="num">+25,000€/mėn.</span></span>
+                    <span class="ticker-item">Teisė ir finansai <span class="num">+12,000€/mėn.</span></span>
+                    <span class="ticker-item">E-komercija <span class="num">+10,000€/mėn.</span></span>
+                    <span class="ticker-item">Odontologija <span class="num">+7,500€/mėn.</span></span>
+                    <span class="ticker-item">Grožio salonai <span class="num">+3,000€/mėn.</span></span>
+                    <span class="ticker-item">Statybos <span class="num">+20,000€/mėn.</span></span>
+                    <span class="ticker-item">Nekilnojamasis turtas <span class="num">+25,000€/mėn.</span></span>
+                    <span class="ticker-item">Teisė ir finansai <span class="num">+12,000€/mėn.</span></span>
+                    <span class="ticker-item">E-komercija <span class="num">+10,000€/mėn.</span></span>
+                </div>
+            </div>
+
+            <div class="hero-eyebrow"><span class="dot"></span> Jūsų konkurentai jau naudoja AI</div>
+
+            <h1 class="hero-headline">
+                Jūsų verslas praranda<br><span class="money">tūkstančius eurų</span> kiekvieną mėnesį<br>nes <span class="ai">niekas neatsako klientams</span>
+            </h1>
+
+            <p class="hero-sub">
+                <strong>Taktas</strong> — AI asistentas, kuris atsako per 3 sekundes, 24/7, lietuviškai. Registruoja, parduoda, konsultuoja. <strong>Nuo 199€/mėn.</strong>
+            </p>
+
+            <div class="live-bar">
+                <span class="live-dot"></span>
+                <span>Šiuo metu laisvos <span class="count" id="spotsCount">47</span> vietos</span>
+            </div>
+
+            <div id="demo">
+                <form class="hero-form" id="heroForm">
+                    <input type="email" placeholder="jusu@imone.lt" required aria-label="El. paštas">
+                    <input type="tel" placeholder="+370 6XX XXXXX" aria-label="Telefonas">
+                    <select aria-label="Verslo sritis" required>
+                        <option value="" disabled selected>Verslo sritis</option>
+                        <option value="odontologija">Odontologija</option>
+                        <option value="grozio-salonas">Grožio salonas</option>
+                        <option value="statyba-renovacija">Statybos ir renovacija</option>
+                        <option value="nekilnojamasis-turtas">Nekilnojamasis turtas</option>
+                        <option value="teise-finansai">Teisė ir finansai</option>
+                        <option value="kita">Kita</option>
+                    </select>
+                    <button type="submit">Gauti nemokamą demo per 24h</button>
+                    <p class="form-note">Be sutarčių. Be rizikos. Demo pilnai pritaikytas jūsų verslui.</p>
+                </form>
+                <div class="success-message" id="heroSuccess">
+                    Puiku! Jūsų demo ruošiamas. Susisieksime per 24h.
+                </div>
+            </div>
+
+            <div class="proof-strip">
+                <div class="proof-box">
+                    <div class="num">&lt;3<em>s</em></div>
+                    <div class="lbl">Atsakymo laikas</div>
+                </div>
+                <div class="proof-box">
+                    <div class="num">24<em>/7</em></div>
+                    <div class="lbl">Be pertraukų</div>
+                </div>
+                <div class="proof-box">
+                    <div class="num">80<em>%</em></div>
+                    <div class="lbl">Sprendžia pats</div>
+                </div>
+                <div class="proof-box">
+                    <div class="num">0<em>€</em></div>
+                    <div class="lbl">Atostogų kaina</div>
+                </div>
+                <div class="proof-box">
+                    <div class="num">5<em>d</em></div>
+                    <div class="lbl">Paleidimo laikas</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PROBLEM -->
+    <section class="problem">
+        <div class="section-label">Problema</div>
+        <h2 class="section-title">Kiekvieną dieną jūs prarandate pinigus</h2>
+        <p class="section-subtitle">Klientai rašo — niekas neatsako. Jie perka pas konkurentą. Kiekvieną. Dieną.</p>
+
+        <div class="problem-grid">
+            <div class="problem-card">
+                <div class="icon">📱</div>
+                <h3>Neatsakytos žinutės</h3>
+                <p>Klientas parašo Facebook — atsakote po 3h. Jis jau nusipirko kitur.</p>
+                <span class="loss">-500€ prarastas klientas</span>
+            </div>
+            <div class="problem-card">
+                <div class="icon">🌙</div>
+                <h3>Po darbo valandų = 0 aptarnavimo</h3>
+                <p>60% užklausų ateina vakare ir savaitgaliais. Jūs miegate — pinigai dingsta.</p>
+                <span class="loss">-15 klientų/mėn.</span>
+            </div>
+            <div class="problem-card">
+                <div class="icon">💸</div>
+                <h3>Reklama be apdorojimo</h3>
+                <p>Investuojate 2,000€ į reklamą, bet 30% užklausų niekada negauna atsakymo.</p>
+                <span class="loss">-600€ išmesta į reklamą</span>
+            </div>
+            <div class="problem-card">
+                <div class="icon">😤</div>
+                <h3>Darbuotojas = brangus + ribotas</h3>
+                <p>Administratorė kainuoja 1,500€/mėn., aptarnauja tik 8h, serga, atostogauja.</p>
+                <span class="loss">-1,500€/mėn. + prarandami klientai</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- VIDEO DEMO -->
+    <section class="video-section">
+        <div class="section-label">Pamatykite patys</div>
+        <h2 class="section-title" style="margin-bottom:1.5rem">Kaip Taktas atrodo jūsų klientui</h2>
+        <div class="video-box" id="videoBox">
+            <div class="play-overlay">
+                <div class="play-btn">
+                    <svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
+                </div>
+                <span class="play-text">Žiūrėti 60s demo</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- BRIDGE -->
+    <div class="solution-bridge">
+        <div class="section-label" style="margin-bottom:0.5rem">Sprendimas</div>
+        <h2 class="section-title">Taktas tai išsprendžia.</h2>
+    </div>
+
+    <!-- NICHES -->
+    <section class="niches" id="sritys">
+        <div class="section-label">Jūsų sritis</div>
+        <h2 class="section-title">Kiek pinigų Taktas uždirbs jūsų verslui?</h2>
+        <p class="section-subtitle">Realūs skaičiai. Realios sritys. Pasirinkite savo.</p>
+
+        <div class="niches-grid">
+            <div class="niche-card">
+                <div class="tag">Aukščiausias ROI</div>
+                <h3>Odontologijos ir medicinos klinikos</h3>
+                <div class="subtitle">AI registratorė, kuri dirba 24/7</div>
+                <p>Registruoja pacientus, atsako apie procedūras ir kainas, primena apie vizitus, sumažina neatvykimus 40%.</p>
+                <div class="result">+15 pacientų/mėn. = +3,000–7,500€</div>
+            </div>
+            <div class="niche-card">
+                <div class="tag">Greičiausias startas</div>
+                <h3>Grožio salonai ir SPA</h3>
+                <div class="subtitle">AI administratorius, kuris niekada neserga</div>
+                <p>Priima registracijas 24/7, siūlo laisvas vietas, rekomenduoja papildomas paslaugas. Net 2 val. nakties.</p>
+                <div class="result">+20 registracijų/mėn. = +1,000–3,000€</div>
+            </div>
+            <div class="niche-card">
+                <div class="tag">Didžiausios sumos</div>
+                <h3>Nekilnojamojo turto agentūros</h3>
+                <div class="subtitle">AI agentas, kuris kvalifikuoja pirkėjus</div>
+                <p>Atsako apie objektus, renka kontaktus, kvalifikuoja pagal biudžetą. Jūs dirbate tik su rimtais klientais.</p>
+                <div class="result">+5 kvalifikuotų klientų/mėn. = +5,000–25,000€</div>
+            </div>
+            <div class="niche-card">
+                <div class="tag">Didelis srautas</div>
+                <h3>Statybos ir renovacija</h3>
+                <div class="subtitle">AI asistentas, kuris generuoja sąmatas</div>
+                <p>Generuoja preliminarias sąmatas, atsako į klientų užklausas apie paslaugas ir kainas, koordinuoja darbus ir registruoja naujus projektus automatiškai.</p>
+                <div class="result">+10 naujų užklausų/mėn. = +8,000–20,000€</div>
+            </div>
+            <div class="niche-card">
+                <div class="tag">Aukšta konversija</div>
+                <h3>Teisės ir finansų įmonės</h3>
+                <div class="subtitle">AI asistentas pirminei konsultacijai</div>
+                <p>Surenka situacijos aprašymą, klasifikuoja užklausą, rezervuoja konsultacijos laiką. Advokatas gauna paruoštą bylą.</p>
+                <div class="result">+8 naujų klientų/mėn. = +4,000–12,000€</div>
+            </div>
+            <div class="niche-card">
+                <div class="tag">E-komercija</div>
+                <h3>Internetinės parduotuvės</h3>
+                <div class="subtitle">AI pardavėjas, kuris rekomenduoja produktus</div>
+                <p>Padeda rasti produktą, atsako apie pristatymą ir grąžinimus, siūlo papildomus produktus. Mažina atsisakymą 25%.</p>
+                <div class="result">+15% konversijos = +2,000–10,000€</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- WHAT THEY GET -->
+    <section class="features">
+        <div class="section-label">Ką gausite</div>
+        <h2 class="section-title">Ką gausite nuo pirmos dienos</h2>
+
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">💬</div>
+                <h3>AI asistentas svetainėje</h3>
+                <p>Pokalbių langelis, kuris atsako realiu laiku, lietuviškai, pagal jūsų paslaugas.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">📱</div>
+                <h3>Facebook + Instagram</h3>
+                <p>AI atsako į žinutes socialiniuose tinkluose automatiškai per sekundes.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">📅</div>
+                <h3>Registracijų sistema</h3>
+                <p>Klientai užsiregistruoja per AI pokalbį. Sinchronizuojame su kalendoriumi.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">📊</div>
+                <h3>Analitikos skydelis</h3>
+                <p>Užklausos, konversijos, populiariausi klausimai — viskas vienoje vietoje.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🔔</div>
+                <h3>Pranešimai jums</h3>
+                <p>Sudėtinga užklausa? Gausite pranešimą su kliento kontaktais per el. paštą ar SMS.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🇱🇹</div>
+                <h3>Tikra lietuvių kalba</h3>
+                <p>Ne Google Translate. Tikras pokalbis su jūsų verslo terminija ir tonu.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- COMPARISON -->
+    <section class="compare">
+        <div class="section-label">Palyginimas</div>
+        <h2 class="section-title">Taktas vs. darbuotojas vs. nieko nedaryti</h2>
+
+        <table class="compare-table">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>Nieko nedaryti</th>
+                    <th>Darbuotojas</th>
+                    <th>Taktas</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Kaina per mėnesį</td>
+                    <td>0€</td>
+                    <td>1,500€+</td>
+                    <td>nuo 199€</td>
+                </tr>
+                <tr>
+                    <td>Darbo valandos</td>
+                    <td class="no">0h</td>
+                    <td>8h/dieną</td>
+                    <td class="yes">24/7</td>
+                </tr>
+                <tr>
+                    <td>Atsakymo greitis</td>
+                    <td class="no">Niekada</td>
+                    <td>1–30 min.</td>
+                    <td class="yes">&lt;3 sek.</td>
+                </tr>
+                <tr>
+                    <td>Savaitgaliai/šventės</td>
+                    <td class="no">Ne</td>
+                    <td class="no">Ne</td>
+                    <td class="yes">Taip</td>
+                </tr>
+                <tr>
+                    <td>Kelios kalbos</td>
+                    <td class="no">—</td>
+                    <td class="no">Retai</td>
+                    <td class="yes">LT + EN + RU</td>
+                </tr>
+                <tr>
+                    <td>Serga/atostogauja</td>
+                    <td>—</td>
+                    <td class="no">Taip</td>
+                    <td class="yes">Niekada</td>
+                </tr>
+                <tr>
+                    <td>Vienu metu aptarnauja</td>
+                    <td class="no">0</td>
+                    <td>1–2</td>
+                    <td class="yes">Neribotai</td>
+                </tr>
+                <tr>
+                    <td>Prarandami klientai</td>
+                    <td class="no">Visi</td>
+                    <td class="no">30%+</td>
+                    <td class="yes">&lt;5%</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <!-- ROI -->
+    <section class="roi">
+        <div class="section-label">Skaičiai nekala</div>
+        <h2 class="section-title">ROI per pirmą mėnesį</h2>
+        <p class="section-subtitle">Pavyzdys: odontologijos klinika</p>
+
+        <div class="roi-box">
+            <div class="roi-row">
+                <span class="label">Praleistų užklausų/mėn.</span>
+                <span class="value">~30</span>
+            </div>
+            <div class="roi-row">
+                <span class="label">Taptų klientais (~50%)</span>
+                <span class="value">15 pacientų</span>
+            </div>
+            <div class="roi-row">
+                <span class="label">Vidutinė paslaugos vertė</span>
+                <span class="value">350€</span>
+            </div>
+            <div class="roi-row">
+                <span class="label">Prarandama kas mėnesį</span>
+                <span class="value red">-5,250€</span>
+            </div>
+            <div class="roi-row">
+                <span class="label">Taktas kaina</span>
+                <span class="value">nuo 199€/mėn.</span>
+            </div>
+            <div class="roi-row">
+                <span class="label">Jūsų papildomas pelnas</span>
+                <span class="value green">+5,051€/mėn.</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- PRICING -->
+    <section class="pricing" id="kainos">
+        <div class="section-label">Kainos</div>
+        <h2 class="section-title">Investicija, kuri atsiperka per pirmą mėnesį</h2>
+        <p class="section-subtitle">Vienkartinis įdiegimas + mėnesinis mokestis. Jokių ilgalaikių sutarčių.</p>
+
+        <div class="pricing-cards">
+            <div class="pricing-card">
+                <h3>Startas</h3>
+                <p class="desc">Mažoms įmonėms, individualiam verslui</p>
+                <div class="price-tag">199€<span>/mėn.</span></div>
+                <p class="price-sub">+ 499€ vienkartinis įdiegimas</p>
+                <ul class="pricing-list">
+                    <li><span class="ck">+</span> AI asistentas svetainėje</li>
+                    <li><span class="ck">+</span> Iki 500 pokalbių/mėn.</li>
+                    <li><span class="ck">+</span> Lietuvių kalba</li>
+                    <li><span class="ck">+</span> Registracijų sistema</li>
+                    <li><span class="ck">+</span> El. pašto pranešimai</li>
+                    <li><span class="ck">+</span> Bazinė analitika</li>
+                    <li><span class="ck">+</span> Paleidimas per 5 d.d.</li>
+                </ul>
+                <button class="pricing-btn" onclick="document.getElementById('demo').scrollIntoView({behavior:'smooth'})">Pradėti</button>
+            </div>
+
+            <div class="pricing-card hot">
+                <h3>Augimas</h3>
+                <p class="desc">Aktyviems verslams su dideliu srautu</p>
+                <div class="price-tag">399€<span>/mėn.</span></div>
+                <p class="price-sub">+ 699€ vienkartinis įdiegimas</p>
+                <ul class="pricing-list">
+                    <li><span class="ck">+</span> Viskas iš Starto</li>
+                    <li><span class="ck">+</span> Neriboti pokalbiai</li>
+                    <li><span class="ck">+</span> Facebook + Instagram</li>
+                    <li><span class="ck">+</span> Kalendoriaus sync</li>
+                    <li><span class="ck">+</span> SMS priminimai klientams</li>
+                    <li><span class="ck">+</span> Prioritetinis palaikymas</li>
+                    <li><span class="ck">+</span> Mėnesinė optimizacija</li>
+                </ul>
+                <button class="pricing-btn" onclick="document.getElementById('demo').scrollIntoView({behavior:'smooth'})">Rinktis augimą</button>
+            </div>
+
+            <div class="pricing-card">
+                <h3>Enterprise</h3>
+                <p class="desc">Didelėms įmonėms, tinklams</p>
+                <div class="price-tag">799€<span>/mėn.</span></div>
+                <p class="price-sub">Įdiegimas — individuali kaina</p>
+                <ul class="pricing-list">
+                    <li><span class="ck">+</span> Viskas iš Augimo</li>
+                    <li><span class="ck">+</span> CRM integracija</li>
+                    <li><span class="ck">+</span> Kelių filialų palaikymas</li>
+                    <li><span class="ck">+</span> API prieiga</li>
+                    <li><span class="ck">+</span> Account manager</li>
+                    <li><span class="ck">+</span> Individualūs sprendimai</li>
+                    <li><span class="ck">+</span> SLA garantija</li>
+                </ul>
+                <button class="pricing-btn" onclick="document.getElementById('demo').scrollIntoView({behavior:'smooth'})">Susisiekti</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- PROCESS -->
+    <section class="process">
+        <div class="section-label">Procesas</div>
+        <h2 class="section-title">Veikia per 5 dienas. Jūs nedarote nieko.</h2>
+
+        <div class="steps">
+            <div class="step">
+                <div class="step-num">1</div>
+                <div>
+                    <h3>Demo skambutis</h3>
+                    <p>Per 15 min. parodome AI asistentą su jūsų paslaugomis, kainomis ir stiliumi.</p>
+                    <span class="tag-time">15 min. jūsų laiko</span>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-num">2</div>
+                <div>
+                    <h3>Mes padarome viską</h3>
+                    <p>Sukuriame, integruojame į svetainę ir socialinius tinklus, testuojame. Jūs tik patvirtinate.</p>
+                    <span class="tag-time">0 min. jūsų laiko</span>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-num">3</div>
+                <div>
+                    <h3>Paleidimas + pinigai</h3>
+                    <p>Paleidžiame, stebime, optimizuojame. Jūs žiūrite kaip auga klientų skaičius dashboarde.</p>
+                    <span class="tag-time">Rezultatai nuo 1 dienos</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="faq">
+        <div class="section-label">D.U.K.</div>
+        <h2 class="section-title">Klausimai ir atsakymai</h2>
+
+        <div class="faq-item">
+            <div class="faq-q">Ar tikrai veikia lietuvių kalba?</div>
+            <div class="faq-a">Taip. Specialiai sukonfigūruotas lietuvių kalbai — su tinkamu tonu, terminais ir gramatika. Tai ne vertėjas, o tikras pokalbis.</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-q">Ar klientai supras, kad tai robotas?</div>
+            <div class="faq-a">AI yra natūralus, bet visada aiškiai pasako, kad yra asistentas. Klientai vertina greitą atsakymą labiau nei tai, kas atsako.</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-q">Kiek laiko užtrunka paleidimas?</div>
+            <div class="faq-a">3–5 darbo dienos. Sudėtingesniems projektams — iki 2 savaičių.</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-q">O jeigu AI nežinos atsakymo?</div>
+            <div class="faq-a">Niekada neišgalvos. Mandagiai pasakys ir perduos jums su kliento kontaktais.</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-q">Ar galiu atšaukti bet kada?</div>
+            <div class="faq-a">Taip. Jokių sutarčių. Bet dar nė vienas klientas neatšaukė.</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-q">Ar reikia techninių žinių?</div>
+            <div class="faq-a">Ne. Mes viską padarome. Jūs tik atsakote į kelis klausimus apie verslą.</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-q">Kodėl Taktas, ne kiti chatbotai?</div>
+            <div class="faq-a">Nes Taktas nėra chatbotas. Tai AI asistentas, specialiai sukurtas jūsų verslui, su jūsų paslaugomis, kainomis ir stiliumi. Lietuviškai. Su integracijomis. Su palaikymu.</div>
+        </div>
+    </section>
+
+    <!-- GUARANTEE -->
+    <section class="guarantee">
+        <div class="guarantee-box">
+            <div class="shield">🛡</div>
+            <h3>30 dienų pinigų grąžinimo garantija</h3>
+            <p>Jeigu per pirmas 30 dienų Taktas nepritraukia nė vieno papildomo kliento — <span class="bold">grąžiname visus pinigus. Be klausimų.</span> Mes tikime savo produktu. Rizikuojame mes, ne jūs.</p>
+        </div>
+    </section>
+
+    <!-- FINAL CTA -->
+    <section class="final-cta">
+        <div class="final-box">
+            <h2>Kol skaitote — jūsų konkurentai jau uždirba su AI</h2>
+            <p>Gaukite nemokamą demo per 24h. Pamatykite savo akimis, kiek klientų prarandate.</p>
+            <form class="hero-form" id="bottomForm">
+                <input type="email" placeholder="jusu@imone.lt" required aria-label="El. paštas">
+                <select aria-label="Verslo sritis" required>
+                    <option value="" disabled selected>Verslo sritis</option>
+                    <option value="odontologija">Odontologija</option>
+                    <option value="grozio-salonas">Grožio salonas</option>
+                    <option value="statyba-renovacija">Statybos ir renovacija</option>
+                    <option value="nekilnojamasis-turtas">Nekilnojamasis turtas</option>
+                    <option value="teise-finansai">Teisė ir finansai</option>
+                    <option value="kita">Kita</option>
+                </select>
+                <button type="submit">Gauti nemokamą demo</button>
+            </form>
+            <div class="success-message" id="bottomSuccess">
+                Puiku! Jūsų demo ruošiamas. Susisieksime per 24h.
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-inner">
+            <div class="footer-logo">Tak<span>tas</span></div>
+            <div class="footer-links">
+                <a href="#kainos">Kainos</a>
+                <a href="#sritys">Sritys</a>
+                <a href="mailto:info@taktas.lt">info@taktas.lt</a>
+            </div>
+            <p class="footer-text">&copy; 2026 Taktas. Vilnius, Lietuva.</p>
+        </div>
+    </footer>
+
+    <script>
+        const STORAGE_KEY = 'taktas_leads';
+
+        function getLeads() {
+            try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]'); }
+            catch { return []; }
+        }
+
+        function saveLead(data) {
+            const list = getLeads();
+            list.push({ ...data, date: new Date().toISOString() });
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(list));
+        }
+
+        function handleForm(formId, msgId) {
+            const form = document.getElementById(formId);
+            const msg = document.getElementById(msgId);
+            if (!form) return;
+
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const email = form.querySelector('input[type="email"]').value;
+                const phone = form.querySelector('input[type="tel"]');
+                const sector = form.querySelector('select');
+
+                saveLead({
+                    email,
+                    phone: phone ? phone.value : '',
+                    sector: sector ? sector.value : ''
+                });
+
+                form.style.display = 'none';
+                msg.classList.add('show');
+                console.log('NEW LEAD:', email, sector ? sector.value : '');
+            });
+        }
+
+        handleForm('heroForm', 'heroSuccess');
+        handleForm('bottomForm', 'bottomSuccess');
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(a => {
+            a.addEventListener('click', function(e) {
+                e.preventDefault();
+                const t = document.querySelector(this.getAttribute('href'));
+                if (t) t.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        });
+
+        // FAQ
+        document.querySelectorAll('.faq-q').forEach(q => {
+            q.addEventListener('click', () => q.parentElement.classList.toggle('open'));
+        });
+
+        // Scroll animations
+        const obs = new IntersectionObserver(entries => {
+            entries.forEach(e => {
+                if (e.isIntersecting) {
+                    e.target.style.opacity = '1';
+                    e.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, { threshold: 0.08 });
+
+        document.querySelectorAll('.feature-card, .step, .niche-card, .problem-card, .pricing-card, .roi-box, .guarantee-box, .compare-table, .video-box').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+            obs.observe(el);
+        });
+
+        // Live spots counter
+        let spots = 47;
+        const spotsEl = document.getElementById('spotsCount');
+        setInterval(() => {
+            if (spots > 11 && Math.random() > 0.65) {
+                spots--;
+                spotsEl.textContent = spots;
+            }
+        }, 25000);
+    </script>
+</body>
+</html>
