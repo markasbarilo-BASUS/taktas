@@ -41,20 +41,20 @@
         /* PROMO BANNER */
         .promo-banner {
             position: fixed; top: 0; left: 0; width: 100%; z-index: 101;
-            background: linear-gradient(135deg, #FF6B00, #FF4444);
+            background: linear-gradient(135deg, #00E59B, #059669);
             padding: 0.55rem 1rem; text-align: center;
-            font-size: 0.82rem; font-weight: 700; color: #fff;
+            font-size: 0.82rem; font-weight: 700; color: #05080F;
             letter-spacing: 0.3px;
         }
         .promo-banner a {
-            color: #fff; text-decoration: underline; font-weight: 800; margin-left: 0.3rem;
+            color: #05080F; text-decoration: underline; font-weight: 900; margin-left: 0.3rem;
         }
         .promo-banner .promo-close {
             position: absolute; right: 1rem; top: 50%; transform: translateY(-50%);
-            background: none; border: none; color: rgba(255,255,255,0.7); font-size: 1.1rem;
+            background: none; border: none; color: rgba(5,8,15,0.5); font-size: 1.1rem;
             cursor: pointer; line-height: 1;
         }
-        .promo-banner .promo-close:hover { color: #fff; }
+        .promo-banner .promo-close:hover { color: #05080F; }
         body.has-promo nav { top: 34px; }
         body.has-promo .hero { padding-top: 9.5rem; }
 
@@ -557,10 +557,10 @@
         }
         .exit-overlay.show { display: flex; }
         .exit-box {
-            background: var(--bg-card); border: 2px solid #FF6B00;
+            background: var(--bg-card); border: 2px solid var(--accent);
             border-radius: 20px; max-width: 460px; width: 100%;
             padding: 2.5rem 2rem; text-align: center; position: relative;
-            box-shadow: 0 0 60px rgba(255, 107, 0, 0.15);
+            box-shadow: 0 0 60px rgba(0, 229, 155, 0.15);
             animation: exitPop 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
         @keyframes exitPop {
@@ -580,15 +580,15 @@
         }
         .exit-box h3 em {
             font-style: normal;
-            background: linear-gradient(135deg, #FF6B00, #FF4444);
+            background: linear-gradient(135deg, var(--accent), var(--primary-light));
             -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
         }
         .exit-box .exit-offer {
-            font-size: 3rem; font-weight: 900; color: #FF6B00;
+            font-size: 3rem; font-weight: 900; color: var(--accent);
             line-height: 1; margin: 0.5rem 0;
         }
         .exit-box .exit-offer-label {
-            font-size: 0.85rem; font-weight: 800; color: #FF6B00;
+            font-size: 0.85rem; font-weight: 800; color: var(--accent);
             text-transform: uppercase; letter-spacing: 2px;
         }
         .exit-box .exit-desc {
@@ -597,14 +597,14 @@
         }
         .exit-box .exit-cta {
             display: inline-block; width: 100%; padding: 0.95rem 2rem;
-            background: linear-gradient(135deg, #FF6B00, #FF4444);
-            color: #fff; border: none; border-radius: 12px;
+            background: var(--accent); color: #05080F;
+            border: none; border-radius: 12px;
             font-size: 1rem; font-weight: 800; cursor: pointer;
             font-family: inherit; text-transform: uppercase; letter-spacing: 0.5px;
             transition: all 0.3s; text-decoration: none;
         }
         .exit-box .exit-cta:hover {
-            transform: translateY(-2px); box-shadow: 0 8px 25px rgba(255, 107, 0, 0.35);
+            transform: translateY(-2px); box-shadow: 0 8px 25px rgba(0, 229, 155, 0.35);
         }
         .exit-box .exit-note {
             font-size: 0.72rem; color: var(--text-muted); margin-top: 0.75rem;
@@ -641,8 +641,8 @@
 
     <!-- PROMO URGENCY BANNER -->
     <div class="promo-banner" id="promoBanner">
-        Kovo akcija: Liko tik <strong>3 vietos</strong> &mdash; 2 m&#279;nesiai nemokamai su metiniu planu
-        <a href="#demo">Rezervuoti dabar &rarr;</a>
+        Naujiena: AI asistentas jau veikia <strong>50+ Lietuvos &#303;moni&#371;</strong> svetain&#279;se &mdash; &#303;diegimas nuo 5 d.d.
+        <a href="#demo">Gauti demo &rarr;</a>
         <button class="promo-close" onclick="closePromo()" aria-label="Uždaryti">&times;</button>
     </div>
 
@@ -1259,13 +1259,13 @@
     <div class="exit-overlay" id="exitPopup">
         <div class="exit-box">
             <button class="exit-close" onclick="closeExitPopup()" aria-label="Uždaryti">&times;</button>
-            <div class="exit-icon">&#9200;</div>
-            <h3>Palauk! Turime <em>special&#371;</em> pasi&#363;lym&#261;</h3>
-            <div class="exit-offer">2 m&#279;n.</div>
-            <div class="exit-offer-label">NEMOKAMAI</div>
-            <p class="exit-desc">Pasirinkite metin&#303; plan&#261; ir gaukite <strong>2 m&#279;nesius nemokamai</strong>.<br>Nemokama 30 min. konsultacija pridedama.</p>
-            <button class="exit-cta" onclick="closeExitPopup();document.getElementById('demo').scrollIntoView({behavior:'smooth'});">Rezervuoti nemokam&#261; konsultacij&#261;</button>
-            <p class="exit-note">Joki&#371; &#303;sipareigojim&#371;. Tik pokalbis.</p>
+            <div class="exit-icon">&#128161;</div>
+            <h3>Ar žinote, kiek klient&#371; <em>prarandate</em> po darbo valand&#371;?</h3>
+            <div class="exit-offer">15 min.</div>
+            <div class="exit-offer-label">NEMOKAMA ANALIZ&#278;</div>
+            <p class="exit-desc">Parodysime <strong>kiek pinig&#371; palieka ant stalo</strong> j&#363;s&#371; verslas kiekvien&#261; m&#279;nes&#303;.<br>Gausite asmeninius skai&#269;ius su j&#363;s&#371; srities duomenimis.</p>
+            <button class="exit-cta" onclick="closeExitPopup();document.getElementById('demo').scrollIntoView({behavior:'smooth'});">Gauti nemokam&#261; analiz&#281;</button>
+            <p class="exit-note">Be &#303;sipareigojim&#371;. Gausite per 24h el. pa&#353;tu.</p>
         </div>
     </div>
 
